@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Alpha Prototype</title>
+      <meta name="description" content="Alpha Prototype">
+      <!-- A-Frame v. 1.5.0 -->
+      <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+      <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+      <!-- Custom Components -->
+      <script src="js/spawn-interactive-objects.js"></script>
+      <script src="js/teleport-player.js"></script>
+      <script src="js/interactive-object.js"></script>
+      <script src="js/custom-player-physics.js"></script>
+      <script src="js/dumpster-interaction.js"></script>
+      <!-- A-Frame Physics Engine (Ammo.js) -->
+      <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
+    </head>
+    <body>
+      <!-- all aframe stuff needs to be in a-scene element | ammo is our physics system-->
+      <a-scene physics=" driver: ammo; debug: true; debugDrawMode: 1;">
+        
+        <!-- A-Frame uses an asset system to try and cache assets so we don't have to download them -->
+        <a-assets>
+            <!-- 3D MODELS -->
+            <!-- gltf is a web optimized 3D format. GLB is a binary form (single-file) and GLTF is a folder of connected files, e.g., textures and vertex data-->
+            <!-- response-type needs to be arraybuffer to properly read the .glb format (because it defaults to JSON)-->
+            <a-asset-item id="axe_model" src="assets/Axe.glb" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item id="staff_model" src="assets/Skeleton Staff.glb" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item id="blade_model" src="assets/Blade.glb" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item id="quiver_model" src="assets/Quiver.glb" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item id="crossbow_model" src="assets/Crossbow.glb" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item id="shield_model" src="assets/Shield.glb" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item id="alt_shield_model" src="assets/Skeleton Shield.glb" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item id="table_model" src="assets/Small Table.glb" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item id="dumpster_model" src="assets/Dumpster.glb" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item id="fence_model" src="assets/Fence.glb" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item id="clock_model" src="assets/clockModel.glb" response-type="arraybuffer"></a-asset-item>
+            
+            <!-- AUDIO SOURCES -->
+            <audio id="scene_music" src="assets/AmbientSong.mp3" preload="auto" crossorigin="anonymous"></audio></a-assets>
+            <audio id="dumpster_sound" src="assets/Squeak.mp3" preload="auto" crossorigin="anonymous"></audio></a-assets>
+            <audio id="button_sound" src="assets/Pop.mp3" preload="auto" crossorigin="anonymous"></audio></a-assets>
+            <audio id="object_sound" src="assets/Whoosh.mp3" preload="auto" crossorigin="anonymous"></audio></a-assets>
+
+        <!-- aframe scene objects -->
+        
+        <!-- CAMERA -->
+        <a-entity 
+            id="camera_id"
+            position="0 2 10" 
+            camera wasd-controls look-controls custom-player-physics
+        >
+            <!-- INTERACTION - cast a ray into the scene and check for interactions with the faces of certain objects in that scene -->
+            <!-- (rayOrigin is where the ray is coming from, raycaster is distance to check, interval is miliseconds between checks, objects is what css selector we use for which objects to check (in this case only the interactive class (i.e., '.interactive'))) -->
+            <a-entity cursor="rayOrigin:mouse;" raycaster="far:25; interval:200; objects:.interactive_far"></a-entity>
+            <a-entity cursor="rayOrigin:mouse;" raycaster="far:10; interval:200; objects:.interactive_medium"></a-entity>
+            <a-entity cursor="rayOrigin:mouse;" raycaster="far:5; interval:200; objects:.interactive_close"></a-entity>
+            
+            <!-- FLASHLIGHT -->
+            <a-entity position="0.5 -0.5 0" light="type:spot; intensity:1.4; angle:40; penumbra:0.3; castShadow:true; shadowBias:-0.0005"></a-entity>
+
+            <!-- HELD OBJECT -->
+            <a-entity
+                id="held_obj_ref"
+                position="0.6 -0.8 -2"
+                scale="1 1 1"
+            ></a-entity>
+
+            <!-- AUDIO COMPONENT (non-diagetic in this particular case) -->
+            <a-entity id="non-diagetic-audio" sound="src:#scene_music; autoplay:true; loop:true; volume:0.5;"></a-entity>
+
+        </a-entity>
+
+        <!-- BUTTON FOR SPAWNING NEW OBJECTS -->
+        <a-entity id="button_parent_entity">
+            <!-- interactive button -->
+            <!-- multiple animations require unique names for each attribute (or 'component' in a-frame) -->
+            <!-- this is done by typing '[attribute/component name]__[insert name]' (i.e., animation__name) -->
+            <!-- spinning-effect is a custom component added in spinning-effect.js -->
+            <a-entity 
+                id="int_obj_spawner_button"
+                class="button interactive_close" 
+                modelNumber="1"
+                objNumber="1"
+                position="0 0.6 0"
+                spawn-interactive-objects
+                geometry="primitive:cylinder; radius:0.15; height:0.2;"
+                material="color:rgb(255, 100, 100);"
+                animation__mouseenter="property:material.color; type:color; to:rgb(255, 0, 0); startEvents:mouseenter; dur:200;"
+                animation__mouseleave="property:material.color; type:color; to:rgb(255, 100, 100); startEvents:mouseleave; dur:200;"
+                animation__click="property:position.y; from:0.55; to:0.6; startEvents:click; dur:300;"
+                sound="src:#button_sound; on: click; poolSize: 10";
+            ></a-entity>
+
+            <!-- button stand -->
+            <a-entity 
+                position="0 0.3 0" 
+                geometry="primitive:box; width:0.5; depth:0.5; height:0.6;"
+                material="color:grey;"
+            ></a-entity>
+        </a-entity>
+        <!-- End of Button Parent entity -->
+
+        <!-- Room Parent Entity -->
+        <a-entity 
+            id="room"
+            shadow="cast:false; receive:true;">
+            <!-- ground -->
+            <a-entity class="ground" 
+                position="0 0.1 -1" 
+                rotation="-90 0 0" 
+                geometry="primitive:plane; width:26; height:30;" 
+                material="color:grey" 
+                ammo-body="type: static" 
+                ammo-shape="type: box" 
+            ></a-entity>
+
+            <!-- walls -->
+            <a-entity id="walls">
+                <!-- right wall -->
+                    <a-entity class="wall" 
+                    position="13 0.1 -1"
+                    rotation="0 -90 0"
+                    ammo-body="type: static" 
+                    ammo-shape="type: box; fit: manual; halfExtents: 15 3 0.25" 
+                >
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="0 0 0"
+                        scale="1 1 1"
+                    ></a-entity>
+                </a-entity>
+                <!-- left wall -->
+                <a-entity class="wall" 
+                    position="-13 0.1 -1"
+                    rotation="0 90 0"
+                    ammo-body="type: static" 
+                    ammo-shape="type: box; fit: manual; halfExtents: 15 3 0.25" 
+                >
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="-11 0 0"
+                        scale="1.15 1 1"
+                    ></a-entity>
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="3.5 0 0"
+                        scale="1.15 1 1"
+                    ></a-entity>
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="11 0 0"
+                        scale="1.15 1 1"
+                    ></a-entity>
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="-3.5 0 0"
+                        scale="1.15 1 1"
+                    ></a-entity>
+                </a-entity>
+                <!-- back wall -->
+                <a-entity class="wall" 
+                    position="0 0.1 14"
+                    rotation="0 180 0"
+                    ammo-body="type: static" 
+                    ammo-shape="type: box; fit: manual; halfExtents: 13 3 0.25" 
+                >
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="-9.75 0 0"
+                        scale="1.05 1 1"
+                    ></a-entity>
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="3.25 0 0"
+                        scale="1.05 1 1"
+                    ></a-entity>
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="9.75 0 0"
+                        scale="1.05 1 1"
+                    ></a-entity>
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="-3.25 0 0"
+                        scale="1.05 1 1"
+                    ></a-entity>
+                </a-entity>
+                <!-- front wall -->
+                <a-entity class="wall" 
+                    position="0 0.1 -16"
+                    rotation="0 0 0"
+                    ammo-body="type: static" 
+                    ammo-shape="type: box; fit: manual; halfExtents: 13 3 0.25" 
+                >
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="-9.75 0 0"
+                        scale="1.05 1 1"
+                    ></a-entity>
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="3.25 0 0"
+                        scale="1.05 1 1"
+                    ></a-entity>
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="9.75 0 0"
+                        scale="1.05 1 1"
+                    ></a-entity>
+                    <a-entity
+                        gltf-model='#fence_model'
+                        position="-3.25 0 0"
+                        scale="1.05 1 1"
+                    ></a-entity>
+                </a-entity>
+            </a-entity>
+
+        </a-entity>
+        <!-- End of parent Room entity -->
+
+        <!-- CUSTOM ENTITIES -->
+        <!-- Interactive Objects In Scene -->
+        <a-entity
+            id="int_objs_parent"
+        >            
+        </a-entity>
+
+        <!-- Garbage Dumpster Parent Entity-->
+        <a-entity
+            position="-13 0 -1"
+        >
+            <!-- Dumpster Obj -->
+            <a-entity
+                id="dumpster_id"
+                class="interactive_close"
+                dumpster-interaction
+                position="0 1.3 0"
+                geometry="primitive: box; width: 4; height: 4; depth: 4"
+                scale="0.7 0.7 0.7"
+                shadow="cast:true; receive:true;"as
+                ammo-body="type: static" 
+                ammo-shape="type: box; fit: manual; halfExtents: 1.2 1 2.2; offset: 0 -0.2 0" 
+                animation__click__scale="property:scale; from:0.75 0.6 0.75; to:0.7 0.7 0.7; startEvents:click; dur:600;"
+                animation__click__pos="property:position; from:0 1 0; to:0 1.3 0; startEvents:click; dur:600;"
+                sound="src:#dumpster_sound; on: click; poolSize: 10";
+                ></a-entity>
+        
+        </a-entity>
+        <!-- End of Garbage Dumpster Parent entity -->
+
+        <!-- Tables Parent Entity -->
+        <a-entity
+        id="table_parent"
+        position="11 0 0"
+        ammo-body="type: static" 
+        ammo-shape="type: box; fit: manual; halfExtents: 2 0.85 16"; 
+        >
+            <!-- Table Group With Unique ID -->
+            <a-entity
+                id="table_group_1"
+                position="0 0 11.25"
+            >
+                <!-- Table to place objects on -->
+                <a-entity   
+                class="table"
+                gltf-model='#table_model'
+                scale="3 1 3"
+                shadow="cast:true; receive:true;"
+                >   
+                    <!-- Placeable Spot Square -->
+                    <a-entity></a-entity>
+                </a-entity>
+            </a-entity>
+            <!-- End of Table Group Entity -->
+            
+            <!-- Table Group With Unique ID -->
+            <a-entity
+                id="table_group_2"
+                position="0 0 5.25"
+            >
+                <!-- Table to place objects on -->
+                <a-entity   
+                class="table"
+                gltf-model='#table_model'
+                scale="3 1 3"
+                shadow="cast:true; receive:true;"
+                >   
+                    <!-- Placeable Spot Square -->
+                    <a-entity></a-entity>
+                </a-entity>
+            </a-entity>
+            <!-- End of Table Group Entity -->
+
+            <!-- Table Group With Unique ID -->
+            <a-entity
+                id="table_group_3"
+                position="0 0 -0.75"
+            >
+                <!-- Table to place objects on -->
+                <a-entity   
+                class="table"
+                gltf-model='#table_model'
+                scale="3 1 3"
+                shadow="cast:true; receive:true;"
+                >   
+                    <!-- Placeable Spot Square -->
+                    <a-entity></a-entity>
+                </a-entity>
+            </a-entity>
+            <!-- End of Table Group Entity -->
+            
+            <!-- Table Group With Unique ID -->
+            <a-entity
+                id="table_group_4"
+                position="0 0 -6.75"
+            >
+                <!-- Table to place objects on -->
+                <a-entity   
+                class="table"
+                gltf-model='#table_model'
+                scale="3 1 3"
+                shadow="cast:true; receive:true;"
+                >   
+                    <!-- Placeable Spot Square -->
+                    <a-entity></a-entity>
+                </a-entity>
+            </a-entity>
+            <!-- End of Table Group Entity -->
+            
+            <!-- Table Group With Unique ID -->
+            <a-entity
+                id="table_group_5"
+                position="0 0 -12.75"
+            >
+                <!-- Table to place objects on -->
+                <a-entity   
+                class="table"
+                gltf-model='#table_model'
+                scale="3 1 3"
+                shadow="cast:true; receive:true;"
+                >   
+                    <!-- Placeable Spot Square -->
+                    <a-entity></a-entity>
+                </a-entity>
+            </a-entity>
+            <!-- End of Table Group Entity -->
+
+        </a-entity>
+        <!-- End of Tables Parent entity -->
+        
+        <!-- external aframe-environment-component -->
+        <a-entity id="environment_id" environment="preset:default"></a-entity>
+
+      </a-scene>
+
+    </body>
+</html>
