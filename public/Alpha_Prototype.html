@@ -3,6 +3,7 @@
     <head>
       <title>Alpha Prototype</title>
       <meta name="description" content="Alpha Prototype">
+      <script src="/socket.io/socket.io.js"></script>
       <!-- A-Frame v. 1.5.0 -->
       <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
       <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
@@ -25,16 +26,6 @@
             <!-- 3D MODELS -->
             <!-- gltf is a web optimized 3D format. GLB is a binary form (single-file) and GLTF is a folder of connected files, e.g., textures and vertex data-->
             <!-- response-type needs to be arraybuffer to properly read the .glb format (because it defaults to JSON)-->
-            <a-asset-item id="axe_model" src="assets/Axe.glb" response-type="arraybuffer"></a-asset-item>
-            <a-asset-item id="staff_model" src="assets/Skeleton Staff.glb" response-type="arraybuffer"></a-asset-item>
-            <a-asset-item id="blade_model" src="assets/Blade.glb" response-type="arraybuffer"></a-asset-item>
-            <a-asset-item id="quiver_model" src="assets/Quiver.glb" response-type="arraybuffer"></a-asset-item>
-            <a-asset-item id="crossbow_model" src="assets/Crossbow.glb" response-type="arraybuffer"></a-asset-item>
-            <a-asset-item id="shield_model" src="assets/Shield.glb" response-type="arraybuffer"></a-asset-item>
-            <a-asset-item id="alt_shield_model" src="assets/Skeleton Shield.glb" response-type="arraybuffer"></a-asset-item>
-            <a-asset-item id="table_model" src="assets/Small Table.glb" response-type="arraybuffer"></a-asset-item>
-            <a-asset-item id="dumpster_model" src="assets/Dumpster.glb" response-type="arraybuffer"></a-asset-item>
-            <a-asset-item id="fence_model" src="assets/Fence.glb" response-type="arraybuffer"></a-asset-item>
             <a-asset-item id="clock_model" src="assets/clockModel.glb" response-type="arraybuffer"></a-asset-item>
             
             <!-- AUDIO SOURCES -->
