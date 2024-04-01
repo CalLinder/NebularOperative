@@ -1,0 +1,122 @@
+<html>
+<head>
+  <!-- Circles' head scripts [REQUIRED] -->
+  <circles-start-scripts/>
+  <!-- Physics script goes after the Circles' head scripts [IMPORTANT]-->
+  <script src="/global/js/libs/aframe-physics-system.min.js"></script>
+  <script src="/worlds/BasicStart/components/physics-object.js"></script>
+  <script src="/worlds/BasicStart/components/custom-physics.js"></script>
+  <!-- Artifact Spawning Script -->
+  <script src="/worlds/BasicStart/scripts/spawn-artifacts.js"></script>
+</head>
+<body onload="setup()">
+  <!-- this is used to create our enter UI that creates a 2D overlay to capture a user gesture for sound/mic access etc. -->
+  <circles-start-ui/>
+
+  <!-- a-scene with 'circles-properties' component [REQUIRED] -->
+  <a-scene circles_scene_properties physics="debug:true; gravity:-9.8; friction: 0.1;">
+    <a-assets>
+
+      <!-- Circles' built-in assets [REQUIRED] -->
+      <circles-assets/>
+
+      <!-- Spawnpoint -->
+      <a-entity circles-checkpoint circles-spawnpoint position="-9 0 0"></a-entity>
+
+      <!-- Environment (.glb) & Navmesh Models -->
+      <a-asset-item id="ID_Environment_Model" src="/worlds/BasicStart/assets/models/Environment_V2.glb" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_Navmesh_Model" src="/worlds/BasicStart/assets/models/Navmesh_V2.glb" response-type="arraybuffer"></a-asset-item>
+      
+      <!-- Artifact Models (.glb) -->
+      <a-asset-item id="ID_Clock_Model" src="/worlds/BasicStart/assets/models/artifacts/Clock.glb" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_DiskDrive_Model" src="/worlds/BasicStart/assets/models/artifacts/DiskDrive.glb" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_Fridge_Model" src="/worlds/BasicStart/assets/models/artifacts/Fridge.glb" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_OpticalLens_Model" src="/worlds/BasicStart/assets/models/artifacts/OpticalLens.glb" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_Radio_Model" src="/worlds/BasicStart/assets/models/artifacts/Radio.glb" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_Syringe_Model" src="/worlds/BasicStart/assets/models/artifacts/Syringe.glb" response-type="arraybuffer"></a-asset-item>
+
+    </a-assets>
+
+    <!-- Circles' built-in manager and avatar [REQUIRED] -->
+    <circles-manager-avatar/>
+  
+    <!-- Item Spawners -->
+    <a-box
+      id="ID_Artifact_Spawner_1"
+      position="-9 1 -2"
+      height="0.25"
+      width="0.25"
+      depth="0.25"
+      color="tomato"
+    ></a-box>
+    
+    <a-box
+      id="ID_Artifact_Spawner_2"
+      position="-9 1 -4"
+      height="0.25"
+      width="0.25"
+      depth="0.25"
+      color="tomato"
+    ></a-box>
+    
+    <a-box
+      id="ID_Artifact_Spawner_3"
+      position="-9 1 -6"
+      height="0.25"
+      width="0.25"
+      depth="0.25"
+      color="tomato"
+    ></a-box>
+
+    <!-- Interactive Artifacts -->
+
+    <!-- TO DO: Add physics to interactive objects in scene -->
+    <!-- <a-entity 
+      id="ID_Clock_Entity"
+      position="0 1 0" rotation="0 0 0" scale="0.1 0.1 0.1"
+      gltf-model="#ID_Clock_Model"
+      physics-object="initialPosition: 0 1 -1; mass:37"
+      dynamic-body="shape: box"
+      circles-pickup-networked
+      circles-pickup-object="pickupScale: 0.1 0.1 0.1; dropScale: 0.1 0.1 0.1; dropRotation: 0 0 0;"
+      custom-physics
+    ></a-entity> -->
+
+    <a-entity 
+      id="ID_Clock_Entity"
+      position="0 1 -1" rotation="0 0 0" scale="1 1 1"
+      gltf-model="#ID_Clock_Model"
+      circles-pickup-networked
+      circles-pickup-object="pickupScale: 1 1 1; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: 0 1 -1"
+    ></a-entity>
+
+    <!-- Environment (.glb) & Navmesh Entities -->
+    <a-entity
+      gltf-model="#ID_Environment_Model"
+      position="0 0 0"
+      shadow="receive: true; cast: true"
+    ></a-entity>
+
+    <a-entity
+    id="ID_Navmesh"
+      gltf-model="#ID_Navmesh_Model"
+      position="0 0 0"
+      visible="false"
+      nav-mesh
+    ></a-entity>
+
+    <!-- Component Lighting -->
+    <a-entity light="type: ambient; intensity: 0.15;"></a-entity>
+    <a-entity light="intensity: 0.1; castShadow: false" position="1 0 0"></a-entity>
+    <a-entity light="intensity: 0.1; castShadow: false" position="-1 0 0"></a-entity>
+    <a-entity light="intensity: 0.1; castShadow: false" position="0 -1 0"></a-entity>
+    <a-entity light="intensity: 0.6; castShadow: false" position="0 1 0"></a-entity>
+    <a-entity light="intensity: 0.1; castShadow: false" position="0 0 1"></a-entity>
+    <a-entity light="intensity: 0.1; castShadow: false" position="0 0 -1"></a-entity>
+
+  </a-scene>
+
+  <!-- Circles' end scripts [REQUIRED] -->
+  <circles-end-scripts/>
+ </body>
+</html>
