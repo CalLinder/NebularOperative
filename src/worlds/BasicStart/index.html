@@ -42,11 +42,22 @@
       <a-asset-item id="ID_Radio_Model" src="/worlds/BasicStart/assets/models/artifacts/Radio.glb" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="ID_Syringe_Model" src="/worlds/BasicStart/assets/models/artifacts/Syringe.glb" response-type="arraybuffer"></a-asset-item>
 
+      <!-- Audio Files (.wav) -->
+      <a-asset-item id="ID_Spaceship_Ambience_SFX" src="/worlds/BasicStart/assets/audio/SFX/Spaceship_Ambience.wav" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_Door_Hiss_SFX" src="/worlds/BasicStart/assets/audio/SFX/Door_Hiss.wav" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_Item_Pickup_SFX" src="/worlds/BasicStart/assets/audio/SFX/Item_Pickup.wav" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_Item_Dropped_SFX" src="/worlds/BasicStart/assets/audio/SFX/Item_Dropped.wav" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_Item_Held_SFX" src="/worlds/BasicStart/assets/audio/SFX/Item_Held.wav" response-type="arraybuffer"></a-asset-item>
+
     </a-assets>
 
     <!-- Circles' built-in manager and avatar [REQUIRED] -->
     <circles-manager-avatar/>
-  
+    
+    <!-- Sounds -->
+    <a-entity circles-sound="type:ambience; src:#ID_Spaceship_Ambience_SFX; autoplay:true; loop:true; volume:0.17;"></a-entity>
+    <a-entity circles-sound="type:basic-nondiegetic; src:#ID_Door_Hiss_SFX; autoplay:true; volume:0.2;"></a-entity>
+
     <!-- Item Spawners -->
     <a-box
       id="ID_Artifact_Spawner_1"
