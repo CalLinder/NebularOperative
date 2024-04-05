@@ -101,17 +101,53 @@ function spawnArtifacts() {
 
     // Loop through for each artifact that needs to be spawned
     for (let i = 1; i <= numArtifacts; i++) {
+
+        let item = artifactList[artifactIDList[i-1]];
+
         // Create new object in document
         let newObject = document.createElement('a-entity');
+
         let spawnerObject = document.querySelector('#ID_Artifact_Spawner_' + i);
             
-        newObject.setAttribute('id', "ID_" + artifactList[artifactIDList[i - 1]].id + "_Entity");
+        newObject.setAttribute('id', "ID_" + item.id + "_Entity");
         newObject.setAttribute("rotation", "0 0 0");
         newObject.setAttribute("scale", "1 1 1");
-        newObject.setAttribute("gltf-model", artifactList[artifactIDList[i - 1]].model_id);
+        newObject.setAttribute("gltf-model", item.model_id);
         newObject.setAttribute("circles-pickup-networked");
         newObject.setAttribute("circles-pickup-object", {pickupScale:"1 1 1", dropScale: "1 1 1", dropRotation: "0 0 0", dropPosition: spawnerObject.object3D.position.x + " " + spawnerObject.object3D.position.y + " " + spawnerObject.object3D.position.z});
         
+        //===UI CODE===
+
+        //Create ui object
+        let objectUI = document.createElement('a-entity');
+
+        objectUI.setAttribute('id', "ID_" + item.id + "_UI");
+        objectUI.setAttribute("floating-ui","");
+        objectUI.setAttribute("position", "0 0.8 0"); //TO DO: REPOSITION ELEMENT AS WE DECIDE
+
+        //UI elements
+        //Background
+        let uiBG = document.createElement('a-entity');
+        uiBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
+        uiBG.setAttribute("scale", "0.8 0.5 0.1");
+        uiBG.setAttribute("material","color:green");
+        
+        //text
+        let uiTex = document.createElement('a-entity');
+        uiTex.setAttribute("text", "value:Made in: " + item.country + 
+        "; color:white; font:roboto; width:0.5; anchor:left; baseline:top; wrapCount:18;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+        uiTex.setAttribute("position", "-0.3 0.2 0.05");
+
+        //append sub-elements
+        objectUI.appendChild(uiBG);
+        objectUI.appendChild(uiTex);
+
+
+        //Append ui to the object before it is instantiated
+        newObject.appendChild(objectUI);    
+
+        //===UI CODE END===
+
         // Append new object to appropriate ID_Artifact_Spawner_[insert number]
         spawnerObject.appendChild(newObject);
     }
