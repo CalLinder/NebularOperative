@@ -11,6 +11,7 @@ schema: {
         //must be const or the event listener later in the code won't be able to reference the variable
         const CONTEXT_AF = this;                                                        //this refers to the component, not the element that the component is attached to
                 
+        
     },
 
     tick: function(time, timeDelta) {
@@ -19,38 +20,42 @@ schema: {
         //if the value stored for the item is different than the currently held item
         if(CONTEXT_AF.item != CIRCLES.getPickedUpElement())
         {
-            //update stored item
-            CONTEXT_AF.item = CIRCLES.getPickedUpElement();
+            //define variable for event
+            var itemPickupDropEvent;
 
-            //dispatch event 
-            const itemPickupDrop = new CustomEvent("itemPickupDrop", {detail: {item: CIRCLES.getPickedUpElement()}});
-            CONTEXT_AF.el.dispatchEvent(itemPickupDrop); //TO DO: (maybe make this networked)
-
-            //Play appropriate sounds
-
-            //If holding an item currently, play pickup sound, loop hold sound, reset drop sound
-            //else do the oposite
-            if(CONTEXT_AF.item)
+            //On pickup
+            if(CIRCLES.getPickedUpElement())
             {
+                //play sounds
                 document.querySelector("#pickupSFXPlayer").setAttribute("circles-sound", {state: "play"});
                 document.querySelector("#heldSFXPlayer").setAttribute("circles-sound", {state: "play"});
                 document.querySelector("#dropSFXPlayer").setAttribute("circles-sound", {state: "stop"});
 
+                //set up event
+                itemPickupDropEvent = new CustomEvent("itemPickupDrop", {detail: {item: CIRCLES.getPickedUpElement(), pickedUp: true}})
+
             }
             else
             {
+                //play sounds
                 document.querySelector("#pickupSFXPlayer").setAttribute("circles-sound", {state: "stop"});
                 document.querySelector("#heldSFXPlayer").setAttribute("circles-sound", {state: "stop"});
                 document.querySelector("#dropSFXPlayer").setAttribute("circles-sound", {state: "play"});
+
+                //set up event
+                itemPickupDropEvent = new CustomEvent("itemPickupDrop", {detail: {item: CONTEXT_AF.item, pickedUp: false}})
             }
 
-            //console.log(document.querySelector("#pickupSFXPlayer"));
-        }
+            //dispatch event to all necessary IDs
+            document.querySelector("#ID_Artifact_Checker_1").dispatchEvent(itemPickupDropEvent); //TO DO: (maybe make this networked)
+            // document.querySelector("#ID_Artifact_Checker_2").dispatchEvent(itemPickupDropEvent); //TO DO: (maybe make this networked)
+            // document.querySelector("#ID_Artifact_Checker_3").dispatchEvent(itemPickupDropEvent); //TO DO: (maybe make this networked)
 
-        //event listener call might look like this
-        // CONTEXT_AF.el.addEventListener("itemPickedUp", function(e) {
-        //     console.log(e.detail.item);  
-        // });        
+            //update stored itemQ
+            CONTEXT_AF.item = CIRCLES.getPickedUpElement();
+
+        }
+  
         
     }
 

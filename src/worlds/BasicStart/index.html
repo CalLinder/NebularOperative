@@ -9,6 +9,7 @@
   <!--Other Components -->
   <script src="/worlds/BasicStart/components/floating-ui.js"></script>
   <script src="/worlds/BasicStart/components/item-pickup-drop-manager.js"></script>
+  <script src="/worlds/BasicStart/components/item-checker.js"></script>
   <!-- Artifact Spawning Script -->
   <script src="/worlds/BasicStart/scripts/spawn-artifacts.js"></script>
   <!-- External Library Dependancies -->
@@ -23,6 +24,7 @@
 
   <!-- a-scene with 'circles-properties' component [REQUIRED] -->
   <a-scene circles_scene_properties physics="debug:true; gravity:-9.8; friction: 0.1;">
+
     <a-assets>
 
       <!-- Circles' built-in assets [REQUIRED] -->
@@ -94,12 +96,33 @@
 
     <a-box
     id="ID_Artifact_Checker_1"
-    position="-8 1 1"
+    position="-5 1 5"
     height="0.25"
     width="0.25"
     depth="0.25"
     color="green"
+    item-checker
   ></a-box>
+
+  <!-- <a-box
+  id="ID_Artifact_Checker_2"
+  position="-3 1 5"
+  height="0.25"
+  width="0.25"
+  depth="0.25"
+  color="green"
+  item-checker
+></a-box>
+
+<a-box
+id="ID_Artifact_Checker_3"
+position="-1 1 5"
+height="0.25"
+width="0.25"
+depth="0.25"
+color="green"
+item-checker
+></a-box> -->
 
     <!-- Interactive Artifacts -->
 
@@ -115,13 +138,13 @@
       custom-physics
     ></a-entity> -->
 
-    <a-entity 
+    <!-- <a-entity 
       id="ID_Clock_Entity"
       position="0 1 -1" rotation="0 0 0" scale="1 1 1"
       gltf-model="#ID_Clock_Model"
       circles-pickup-networked
       circles-pickup-object="pickupScale: 1 1 1; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: 0 1 -1"
-    ></a-entity>
+    ></a-entity> -->
 
     <!-- Environment (.glb) & Navmesh Entities -->
     <a-entity

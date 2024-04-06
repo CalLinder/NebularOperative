@@ -114,7 +114,7 @@ function spawnArtifacts() {
         newObject.setAttribute("scale", "1 1 1");
         newObject.setAttribute("gltf-model", item.model_id);
         newObject.setAttribute("circles-pickup-networked","");
-        newObject.setAttribute("circles-pickup-object", {pickupScale:"1 1 1", pickupRotation:"0 -90 0", pickupPosition:"1.5 -1 0.5 ", dropScale: "1 1 1", dropRotation: "0 0 0", dropPosition: spawnerObject.object3D.position.x + " " + spawnerObject.object3D.position.y + " " + spawnerObject.object3D.position.z});
+        newObject.setAttribute("circles-pickup-object", {pickupScale:"1 1 1", pickupRotation:"0 -90 0", pickupPosition:"1.5 -1 0.5 ", dropScale: "1 1 1", dropRotation: "0 0 0", dropPosition: "0 0 0"});
         
         //TEMP ITEM PICKUP SFX IMPLEMENTATION - WE CAN FALL BACK TO THIS IF NEEDED  
         //newObject.setAttribute("circles-interactive-object", "click_sound:#ID_Item_Pickup_SFX");
