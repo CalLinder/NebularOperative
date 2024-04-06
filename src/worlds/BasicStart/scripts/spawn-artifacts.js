@@ -114,10 +114,10 @@ function spawnArtifacts() {
         newObject.setAttribute("scale", "1 1 1");
         newObject.setAttribute("gltf-model", item.model_id);
         newObject.setAttribute("circles-pickup-networked");
-        newObject.setAttribute("circles-pickup-object", {pickupScale:"1 1 1", dropScale: "1 1 1", dropRotation: "0 0 0", dropPosition: spawnerObject.object3D.position.x + " " + spawnerObject.object3D.position.y + " " + spawnerObject.object3D.position.z});
+        newObject.setAttribute("circles-pickup-object", {pickupScale:"1 1 1", pickupRotation:"0 -90 0", pickupPosition:"1.5 -1 0.5 ", dropScale: "1 1 1", dropRotation: "0 0 0", dropPosition: spawnerObject.object3D.position.x + " " + spawnerObject.object3D.position.y + " " + spawnerObject.object3D.position.z});
         
         //TEMP ITEM PICKUP SFX IMPLEMENTATION - WE CAN FALL BACK TO THIS IF NEEDED  
-        newObject.setAttribute("circles-interactive-object", "click_sound:#ID_Item_Pickup_SFX");
+        //newObject.setAttribute("circles-interactive-object", "click_sound:#ID_Item_Pickup_SFX");
 
         //===UI CODE===
 
@@ -151,24 +151,7 @@ function spawnArtifacts() {
 
         //===UI CODE END===
 
-        //===AUDIO CODE===
 
-        //TO DO: MAKE ALL OF THESE SFX WORK AS INTENDED - REQUIRES FLAGS FOR WHEN ITEMS ARE PICKED UP. THEY NEED NOT BE NETWORKED, THOUGH IDEALLY THEY WOULD BE.
-        
-        //Create audio sources
-        //let objectPickUpSFX = document.createElement('a-entity');
-        //let objectDroppedSFX = document.createElement('a-entity');
-        //let objectHeldSFX = document.createElement('a-entity');
-
-        //Setup sources
-        //objectPickUpSFX.setAttribute("circles-sound", "type:basic-diegetic; src:#ID_Item_Pickup_SFX; autoplay:false; loop:false; volume:0.2;");
-        //objectDroppedSFX.setAttribute("circles-sound", "type:basic-diegetic; src:#ID_Item_Dropped_SFX; autoplay:false; loop:false; volume:0.2;");
-        //objectHeldSFX.setAttribute("circles-sound", "type:basic-diegetic; src:#ID_Item_Held_SFX; autoplay:false; loop:true; volume:0.18;");
-
-        //TO-DO: TRACK WHEN ITEMS ARE PICKED UP
-
-
-        //===AUDIO CODE END===
 
         // Append new object to appropriate ID_Artifact_Spawner_[insert number]
         spawnerObject.appendChild(newObject);
