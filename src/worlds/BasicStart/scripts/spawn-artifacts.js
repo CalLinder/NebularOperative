@@ -133,7 +133,7 @@ function spawnArtifacts() {
         let uiBG = document.createElement('a-entity');
         uiBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
         uiBG.setAttribute("scale", "0.8 0.5 0.1");
-        uiBG.setAttribute("material","color:green");
+        uiBG.setAttribute("material","color:blue");
         
         //text
         let uiTex = document.createElement('a-entity');
