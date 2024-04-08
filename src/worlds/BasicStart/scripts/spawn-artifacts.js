@@ -119,42 +119,49 @@ function spawnArtifacts() {
         //TEMP ITEM PICKUP SFX IMPLEMENTATION - WE CAN FALL BACK TO THIS IF NEEDED  
         //newObject.setAttribute("circles-interactive-object", "click_sound:#ID_Item_Pickup_SFX");
 
-        //===UI CODE===
-
-        //Create ui object
-        let objectUI = document.createElement('a-entity');
-
-        objectUI.setAttribute('id', "ID_" + item.id + "_UI");
-        objectUI.setAttribute("floating-ui","");
-        objectUI.setAttribute("position", "0 0.8 0"); //TO DO: REPOSITION ELEMENT AS WE DECIDE
-
-        //UI elements
-        //Background
-        let uiBG = document.createElement('a-entity');
-        uiBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
-        uiBG.setAttribute("scale", "0.8 0.5 0.1");
-        uiBG.setAttribute("material","color:blue");
-        
-        //text
-        let uiTex = document.createElement('a-entity');
-        uiTex.setAttribute("text", "value:Made in: " + item.country + 
-        "; color:white; font:roboto; width:0.5; anchor:left; baseline:top; wrapCount:18;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
-        uiTex.setAttribute("position", "-0.3 0.2 0.05");
-
-        //append sub-elements
-        objectUI.appendChild(uiBG);
-        objectUI.appendChild(uiTex);
-
-
-        //Append ui to the object before it is instantiated
-        newObject.appendChild(objectUI);    
-
-        //===UI CODE END===
-
-
-
         // Append new object to appropriate ID_Artifact_Spawner_[insert number]
-        spawnerObject.appendChild(newObject);
+        //redefine newObject to point at the instatiated object
+        newObject = spawnerObject.appendChild(newObject);
+
+        //create an event listner applied to all models to create their UI elements when the models are loaded
+        newObject.addEventListener('model-loaded', function () {                            
+                // Get the artifact's bounding box
+                let boundingBox = new THREE.Box3().setFromObject(newObject.object3D);
+                
+                //===CREATE UI CODE===
+        
+                //Create ui object
+                let objectUI = document.createElement('a-entity');
+        
+                objectUI.setAttribute('id', "ID_" + item.id + "_UI");
+                objectUI.setAttribute("floating-ui","");
+                objectUI.setAttribute("position", "0 " + (boundingBox.max.y - 0.7) + " 0"); 
+        
+                //UI elements
+                //Background
+                let uiBG = document.createElement('a-entity');
+                uiBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
+                uiBG.setAttribute("scale", "0.8 0.5 0.1");
+                uiBG.setAttribute("material","color:blue");
+                
+                //text
+                let uiTex = document.createElement('a-entity');
+                uiTex.setAttribute("text", "value:Made in: " + item.country + 
+                "; color:white; font:roboto; width:0.5; anchor:left; baseline:top; wrapCount:18;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+                uiTex.setAttribute("position", "-0.3 0.2 0.05");
+        
+                //append sub-elements
+                objectUI.appendChild(uiBG);
+                objectUI.appendChild(uiTex);
+        
+        
+                //Append ui to the artifact
+                newObject.appendChild(objectUI);    
+        
+                //===CREATE UI CODE END===
+          });
+
+
     }
 }
 

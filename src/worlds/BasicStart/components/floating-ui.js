@@ -55,7 +55,7 @@ AFRAME.registerComponent('floating-ui', {
     let children = Context_AF.el.children;
 
     //===IF CONDITION FOR DISPLAYING UI=== (Currently showing if distnce between player and UI ELEMENT is <= 3m)
-    if (/*item == selected*/Context_AF_WP.distanceTo(document.querySelector('#Player1').object3D.position) <= 3) //TO DO: UPDATE THIS CONDITION IF NECESSARY
+    if (/*item == selected*/Context_AF_WP.distanceTo(document.querySelector('#Player1').object3D.position) <= 4) //TO DO: UPDATE THIS CONDITION IF NECESSARY
     {
 
       if(Context_AF.el.getAttribute('animation__ON').enabled == false)

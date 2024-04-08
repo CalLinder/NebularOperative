@@ -51,7 +51,7 @@ schema: {
             // document.querySelector("#ID_Artifact_Checker_2").dispatchEvent(itemPickupDropEvent); //TO DO: (maybe make this networked)
             // document.querySelector("#ID_Artifact_Checker_3").dispatchEvent(itemPickupDropEvent); //TO DO: (maybe make this networked)
 
-            //update stored itemQ
+            //update stored item
             CONTEXT_AF.item = CIRCLES.getPickedUpElement();
 
         }
