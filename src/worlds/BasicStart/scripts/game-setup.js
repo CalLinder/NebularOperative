@@ -16,7 +16,7 @@ function setupGame(){
     //set button to spawn new artifact on press
     let testButtonEl = document.querySelector('#test_button');     //get button element
     testButtonEl.addEventListener('click', function() {            //add event listener for on click
-        setupArtifacts()                                           //run setupArtifacts()
+        setupArtifacts();                                           //run setupArtifacts()
     });
 
     // Spawn all artifacts into scene
