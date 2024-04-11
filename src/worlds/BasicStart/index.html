@@ -49,9 +49,13 @@
       <a-asset-item id="ID_Radio_Model" src="/worlds/BasicStart/assets/models/artifacts/Radio.glb" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="ID_Syringe_Model" src="/worlds/BasicStart/assets/models/artifacts/Syringe.glb" response-type="arraybuffer"></a-asset-item>
 
-      <!-- UI Models (.glb) -->
-      <a-asset-item id="ID_UI_Game_Info_Model" src="/worlds/BasicStart/assets/models/ui/UI_Game_Info.glb" response-type="arraybuffer"></a-asset-item>
-      <a-asset-item id="ID_UI_Object_Info_Model" src="/worlds/BasicStart/assets/models/ui/UI_Object_Info.glb" response-type="arraybuffer"></a-asset-item>
+      <!-- UI Models (.obj and .mtl) -->
+      <a-asset-item id="ID_UI_Game_Info_Model" src="/worlds/BasicStart/assets/models/ui/backup/UI_GameInfo.glb" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_UI_Object_Info_Model" src="/worlds/BasicStart/assets/models/ui/backup/UI_ObjectInfo.glb" response-type="arraybuffer"></a-asset-item>
+
+      <a-asset-item id="ID_UI_Game_Info_Mtl" src="/worlds/BasicStart/assets/models/ui/UI_GameInfo.mtl" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_UI_Object_Info_Mtl" src="/worlds/BasicStart/assets/models/ui/UI_ObjectInfo.mtl" response-type="arraybuffer"></a-asset-item>
+
 
       <!-- Audio Files (.wav) -->
       <a-asset-item id="ID_Spaceship_Ambience_SFX" src="/worlds/BasicStart/assets/audio/SFX/Spaceship_Ambience.wav" response-type="arraybuffer"></a-asset-item>
@@ -127,6 +131,8 @@
       color="green"
       item-checker
     ></a-box>
+
+    <!-- <a-entity obj-model="obj:#ID_UI_Game_Info_Model; mtl:#ID_UI_Game_Info_Mtl"></a-entity> -->
 
     <!-- Screens -->
     <a-entity screen id="ID_Screen_1" position="-7.924 1.85045 8.802" geometry="primitive:box"></a-entity>
