@@ -47,7 +47,7 @@ schema: {
                             audioSFXPlayer.setAttribute("circles-sound", "state: play");
 
                             //Change UI background's colour for this object
-                            CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("material","color:yellow");
+                            CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("text","value:CHECKING...; color:yellow");
 
                             //Checked
                             setTimeout(function() {
@@ -68,7 +68,7 @@ schema: {
                                     audioSFXPlayer.setAttribute("circles-sound", "state: play");
 
                                     //update colour
-                                    CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("material","color:green");
+                                    CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("text","value:CORRECT; color:green");
 
 
                                 }
@@ -80,7 +80,7 @@ schema: {
                                     audioSFXPlayer.setAttribute("circles-sound", "state: play");
                                     
                                     //update colour
-                                    CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("material","color:red");
+                                    CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("text","value:INCORRECT; color:red");
                                 }
 
                                 //wait a bit and reset
