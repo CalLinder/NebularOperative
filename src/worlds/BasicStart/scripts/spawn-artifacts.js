@@ -174,6 +174,7 @@ function spawnArtifacts() {
                 uiBG.setAttribute("scale", "0.8 0.8 0.8");
                 uiBG.setAttribute("rotation", "0 90 0");
                 uiBG.setAttribute("gltf-model", "#ID_UI_Object_Info_Model");
+                // guiBG.setAttribute("obj-model", "obj: #ID_UI_Object_Info_Model; mtl:#ID_UI_Object_Info_Mtl");
                 // uiBG.setAttribute("shader", "flat" );
 
 
@@ -218,11 +219,37 @@ function spawnArtifacts() {
                 uiTex_Title = objectUI.appendChild(uiTex_Title);
                 uiTex_Desc = objectUI.appendChild(uiTex_Desc);
 
+                //create game UI
 
+                //Create ui object
+                let gameUI = document.createElement('a-entity');
+        
+                gameUI.setAttribute('id', "ID_" + item.artifact_id + "_Game_UI");
+                gameUI.setAttribute("floating-ui","");
+                gameUI.setAttribute("position", "0.5 -0.05 0"); 
+                gameUI.setAttribute("rotation", "0 90 0");
 
+                //Game element bg
+                let guiBG = document.createElement('a-entity');
+                //uiGameBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
+                //uiGameBG.setAttribute("material","color:blue");
+                guiBG.setAttribute("scale", "0.7 0.7 0.7");
+                guiBG.setAttribute("rotation", "0 90 0");
+                guiBG.setAttribute("gltf-model", "#ID_UI_Game_Info_Model");
+                // guiBG.setAttribute("obj-model", "obj: #ID_UI_Game_Info_Model; mtl:#ID_UI_Game_Info_Mtl");
+                // uiGameBG.setAttribute("shader", "flat" );
 
+                //append game ui sub-objects
+                guiBG = gameUI.appendChild(guiBG);
+
+                //stop model loading event from bubbling up and causing an infinite loop
+                guiBG.addEventListener('model-loaded', function (e) { 
+                    e.stopPropagation();
+                });
+                
                 //Append ui to the artifact
                 newObject.appendChild(objectUI);    
+                newObject.appendChild(gameUI);    
         
                 //===CREATE UI CODE END===
           });

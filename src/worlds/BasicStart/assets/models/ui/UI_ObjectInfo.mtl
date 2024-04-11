@@ -1,0 +1,22 @@
+# Blender 4.0.2 MTL File: 'UIModels.blend'
+# www.blender.org
+
+newmtl UI_BG_mat
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Alvis Lin/Downloads/SCHOOL/2024/Design Studio 3 IMD 3901/Term Project/3D/Textures/UI_Background_mat.png
+
+newmtl UI_NeonBlueHighlight_mat
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.964644 0.999928
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.481948 0.500000
+Ni 1.450000
+d 1.000000
+illum 2
