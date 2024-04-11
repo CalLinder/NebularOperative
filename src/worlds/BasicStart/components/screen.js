@@ -29,7 +29,7 @@ AFRAME.registerComponent('screen', {
 
         //Default text displayed immidiately
         let textBasic = document.createElement('a-entity');
-        textBasic.setAttribute("text", "value:Target item: ; color:white; font:roboto; width:2; anchor:left; baseline:top; wrapCount:18;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+        textBasic.setAttribute("text", "value:Target item: ; color:white; font:"+ font +"; width:2; anchor:left; baseline:top; wrapCount:18;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
         textBasic.setAttribute("position", "0.45 0.35 -0.5");
         textBasic.setAttribute("rotation", "0 180 0");
         textBasic.setAttribute("scale", 1/scaleFactorX + " " + 1/scaleFactorY + " " + 1/scaleFactorZ);
@@ -38,7 +38,7 @@ AFRAME.registerComponent('screen', {
 
         //Create Year
         let textYear = document.createElement('a-entity');
-        textYear.setAttribute("text", "value:Year: " + challengeYear + " ; color:white; font:roboto; width:2.8; anchor:left; baseline:top; wrapCount:40;");
+        textYear.setAttribute("text", "value:Year: " + challengeYear + " ; color:white; font:"+ font +"; width:2.8; anchor:left; baseline:top; wrapCount:40;");
         textYear.setAttribute("position", "0.45 0.2 -0.5");
         textYear.setAttribute("rotation", "0 180 0");
         textYear.setAttribute("visible", "false");
@@ -48,7 +48,7 @@ AFRAME.registerComponent('screen', {
 
         //Create Country
         let textCountry = document.createElement('a-entity');
-        textCountry.setAttribute("text", "value:Country: " + challengeCountry + " ; color:white; font:roboto; width:2.8; anchor:left; baseline:top; wrapCount:40;");
+        textCountry.setAttribute("text", "value:Country: " + challengeCountry + " ; color:white; font:"+ font +"; width:2.8; anchor:left; baseline:top; wrapCount:40;");
         textCountry.setAttribute("position", "0.45 0.1 -0.5");
         textCountry.setAttribute("rotation", "0 180 0");
         textCountry.setAttribute("visible", "false");
@@ -58,7 +58,7 @@ AFRAME.registerComponent('screen', {
 
         //Create Manufactuerer
         let textManufacturer = document.createElement('a-entity');
-        textManufacturer.setAttribute("text", "value:Manufacturer: " + challengeManufacturer + " ; color:white; font:roboto; width:2.8; anchor:left; baseline:top; wrapCount:40;");
+        textManufacturer.setAttribute("text", "value:Manufacturer: " + challengeManufacturer + " ; color:white; font:"+ font +"; width:2.8; anchor:left; baseline:top; wrapCount:40;");
         textManufacturer.setAttribute("position", "0.45 0.0 -0.5");
         textManufacturer.setAttribute("rotation", "0 180 0");
         textManufacturer.setAttribute("visible", "false");

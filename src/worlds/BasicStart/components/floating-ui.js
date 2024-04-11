@@ -31,9 +31,9 @@ AFRAME.registerComponent('floating-ui', {
 
       else
       {        
-        // children[i].setAttribute('model-opacity', '');
-        // children[i].setAttribute('animation__ON', {property:'model-opacity.opacity', to:0.8, dur:fade, easing:'linear', enabled:false});
-        // children[i].setAttribute('animation__OFF', {property:'model-opacity.opacity', to:0, dur:fade, easing:'linear', enabled:true});
+        children[i].setAttribute('material', 'opacity:"0.0f"');
+        children[i].setAttribute('animation__ON', {property:'material.opacity', to:1.0, dur:fade, easing:'linear', enabled:false});
+        children[i].setAttribute('animation__OFF', {property:'material.opacity', to:0, dur:fade, easing:'linear', enabled:true});
       }
     }
 

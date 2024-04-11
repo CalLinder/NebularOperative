@@ -2,6 +2,7 @@
 
 // Global Vars
 const numArtifacts = 3; // Ensure there are enough ID_Artifact_Spawner_[insert number]'s in scene to match numArtifacts
+const font = "dejavu";
 
 // Test Values | Goal is 'OpticalLens' and therefore it MUST spawn in the round
 const challengeYear = '1943';
@@ -22,7 +23,7 @@ artifactList['Clock'] = {
     model_id: '#ID_Clock_Model',
     image_id: '#ID_Clock_IMG',
     model_path: '/worlds/BasicStart/assets/models/artifacts/Clock.glb',
-    name: 'Automotive Clock',
+    name: 'AUTOMOTIVE CLOCK',
     description: 'A BRASS OBJECT WITH A GLASS FACE. USED AS A AUTOMOTIVE PART',
     number: '716'
 
@@ -36,7 +37,7 @@ artifactList['DiskDrive'] = {
     model_id: '#ID_DiskDrive_Model',
     image_id: '#ID_DiskDrive_IMG',
     model_path: '/worlds/BasicStart/assets/models/artifacts/DiskDrive.glb',
-    name: 'Controller, disk drive',
+    name: 'CONTROLLER, DISK DRIVE',
     description: 'THE CONTROL UNIT FOR THE DISK DRIVES USED AS AUXILIARY STORAGE DEVICES FOR LARGE QUANTITY AND/OR LONG TERM STORAGE',
     number: '734'
 };
@@ -48,7 +49,7 @@ artifactList['Fridge'] = {
     model_id: '#ID_Fridge_Model',
     image_id: '#ID_Fridge_IMG',
     model_path: '/worlds/BasicStart/assets/models/artifacts/Fridge.glb',
-    name: 'Electric Refrigerator',
+    name: 'ELECTRIC REFRIGERATOR',
     description: 'THE MANUFACTUER OF THE REFRIGERATORS DESIGNED THE PRODUCT TO MEET TECHNOLOGICAL, BUT ALSO FASHION REQUIREMENTS OF A MODERN HOUSEWIFE.',
     number: '715'
 };
@@ -60,7 +61,7 @@ artifactList['OpticalLens'] = {
     model_id: '#ID_OpticalLens_Model',
     image_id: '#ID_OpticalLens_IMG',
     model_path: '/worlds/BasicStart/assets/models/artifacts/OpticalLens.glb',
-    name: 'Flat, optical',
+    name: 'FLAT, OPTICAL',
     description: 'USED IN PAIRS IN CONJUNCTION WITH A MONOCHROMATIC LIGHT SOURCE TO TEST THE FLATNESS OF A THIRD SURFACE',
     number: '351'
 };
@@ -72,7 +73,7 @@ artifactList['Radio'] = {
     model_id: '#ID_Radio_Model',
     image_id: '#ID_Radio_IMG',
     model_path: '/worlds/BasicStart/assets/models/artifacts/Radio.glb',
-    name: 'Receiver, radio',
+    name: 'RECEIVER, RADIO',
     description: 'TO RECEIVE, DEMODULATE & AMPLIFY AM AND SHORT WAVE (2 BANDS) STANDARD BROADCAST SIGNALS',
     number: '845'
 };
@@ -84,7 +85,7 @@ artifactList['Syringe'] = {
     model_id: '#ID_Syringe_Model',
     image_id: '#ID_Syringe_IMG',
     model_path: '/worlds/BasicStart/assets/models/artifacts/Syringe.glb',
-    name: 'Syringe, irrigation',
+    name: 'SYRINGE, IRRIGATION',
     description: 'USED TO FLUSH EAR CANAL WITH WARM OIL & SALINE SOLUTION TO ORDER REMOVE WAX AND OTHER DEBRIS.',
     number: '251'
 };
@@ -141,7 +142,7 @@ function spawnArtifacts() {
         newObject.setAttribute("scale", "1 1 1");
         newObject.setAttribute("gltf-model", item.model_id);
         newObject.setAttribute("circles-pickup-networked","");
-        newObject.setAttribute("circles-pickup-object", {pickupScale:"1 1 1", pickupRotation:"0 -90 0", pickupPosition:"1.5 -1 0.5 ", dropScale: "1 1 1", dropRotation: "0 0 0", dropPosition: "0 0 0"});
+        newObject.setAttribute("circles-pickup-object", {pickupScale:"1 1 1", pickupRotation:"0 -190 0", pickupPosition:"0 0 0 ", dropScale: "1 1 1", dropRotation: "0 0 0", dropPosition: "0 0 0"});
         
         //TEMP ITEM PICKUP SFX IMPLEMENTATION - WE CAN FALL BACK TO THIS IF NEEDED  
         //newObject.setAttribute("circles-interactive-object", "click_sound:#ID_Item_Pickup_SFX");
@@ -163,18 +164,29 @@ function spawnArtifacts() {
                 objectUI.setAttribute('id', "ID_" + item.artifact_id + "_UI");
                 objectUI.setAttribute("floating-ui","");
                 objectUI.setAttribute("position", "0 " + (boundingBox.max.y - 1) + " 0"); 
+                objectUI.setAttribute("rotation", "0 90 0"); 
         
                 //UI elements
                 //Background
                 let uiBG = document.createElement('a-entity');
                 //uiBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
+                //uiBG.setAttribute("material","color:blue");
                 uiBG.setAttribute("scale", "0.8 0.8 0.8");
                 uiBG.setAttribute("rotation", "0 90 0");
-                //uiBG.setAttribute("material","color:blue");
                 uiBG.setAttribute("gltf-model", "#ID_UI_Object_Info_Model");
-                        
+                // uiBG.setAttribute("shader", "flat" );
+
+
+                //IMAGE
+                let imgUI = document.createElement('a-entity');
+                imgUI.setAttribute("geometry", "primitive:plane");
+                imgUI.setAttribute("scale", "0.25 0.25 1");
+                imgUI.setAttribute("material", "src:#ID_" + item.artifact_id + "_IMG; shader:flat; transparent:true;" );
+                imgUI.setAttribute("position", "-0.225 0.3 0.01" );
+
                 //append geometry elements
                 uiBG = objectUI.appendChild(uiBG);
+                imgUI = objectUI.appendChild(imgUI);
                 
                 //stop model loading event from bubbling up and causing an infinite loop
                 uiBG.addEventListener('model-loaded', function (e) { 
@@ -182,13 +194,19 @@ function spawnArtifacts() {
                 });
 
                 //===text===
-                let uiTex = document.createElement('a-entity');
-                uiTex.setAttribute("text", "value:" + item.name + 
-                "; color:white; font:mozillavr; width:0.6; anchor:left; baseline:top; wrapCount:18;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
-                uiTex.setAttribute("position", "-0.35 0.57 0.01");
+                let uiTex_Title = document.createElement('a-entity');
+                uiTex_Title.setAttribute("text", "value:" + item.name + 
+                "; color:white; font:"+ font +"; width:0.7; anchor:left; baseline:top; wrapCount:22;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+                uiTex_Title.setAttribute("position", "-0.36 0.53 0.01");
+
+                let uiTex_Desc = document.createElement('a-entity');
+                uiTex_Desc.setAttribute("text", "value:" + item.description + 
+                "; color:white; font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:22;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+                uiTex_Desc.setAttribute("position", "-0.07 0.43 0.01");
 
                 //append text
-                uiTex = objectUI.appendChild(uiTex);
+                uiTex_Title = objectUI.appendChild(uiTex_Title);
+                uiTex_Desc = objectUI.appendChild(uiTex_Desc);
 
 
 
