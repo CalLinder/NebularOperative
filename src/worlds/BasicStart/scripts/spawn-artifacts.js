@@ -20,7 +20,13 @@ artifactList['Clock'] = {
     country: 'Unknown',
     manufacturer: 'Waltham Watch Co.',
     model_id: '#ID_Clock_Model',
-    model_path: '/worlds/BasicStart/assets/models/artifacts/Clock.glb'
+    image_id: '#ID_Clock_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/Clock.glb',
+    name: 'Automotive Clock',
+    description: 'A BRASS OBJECT WITH A GLASS FACE. USED AS A AUTOMOTIVE PART',
+    number: '716'
+
+
 };
 artifactList['DiskDrive'] = {
     artifact_id: 'DiskDrive',
@@ -28,7 +34,11 @@ artifactList['DiskDrive'] = {
     country: 'England',
     manufacturer: 'International Computers Ltd',
     model_id: '#ID_DiskDrive_Model',
-    model_path: '/worlds/BasicStart/assets/models/artifacts/DiskDrive.glb'
+    image_id: '#ID_DiskDrive_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/DiskDrive.glb',
+    name: 'Controller, disk drive',
+    description: 'THE CONTROL UNIT FOR THE DISK DRIVES USED AS AUXILIARY STORAGE DEVICES FOR LARGE QUANTITY AND/OR LONG TERM STORAGE',
+    number: '734'
 };
 artifactList['Fridge'] = {
     artifact_id: 'Fridge',
@@ -36,7 +46,11 @@ artifactList['Fridge'] = {
     country: 'United States of America',
     manufacturer: 'International Harvester Co.',
     model_id: '#ID_Fridge_Model',
-    model_path: '/worlds/BasicStart/assets/models/artifacts/Fridge.glb'
+    image_id: '#ID_Fridge_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/Fridge.glb',
+    name: 'Electric Refrigerator',
+    description: 'THE MANUFACTUER OF THE REFRIGERATORS DESIGNED THE PRODUCT TO MEET TECHNOLOGICAL, BUT ALSO FASHION REQUIREMENTS OF A MODERN HOUSEWIFE.',
+    number: '715'
 };
 artifactList['OpticalLens'] = {
     artifact_id: 'OpticalLens',
@@ -44,7 +58,11 @@ artifactList['OpticalLens'] = {
     country: 'England',
     manufacturer: 'National Physical Laboratories',
     model_id: '#ID_OpticalLens_Model',
-    model_path: '/worlds/BasicStart/assets/models/artifacts/OpticalLens.glb'
+    image_id: '#ID_OpticalLens_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/OpticalLens.glb',
+    name: 'Flat, optical',
+    description: 'USED IN PAIRS IN CONJUNCTION WITH A MONOCHROMATIC LIGHT SOURCE TO TEST THE FLATNESS OF A THIRD SURFACE',
+    number: '351'
 };
 artifactList['Radio'] = {
     artifact_id: 'Radio',
@@ -52,7 +70,11 @@ artifactList['Radio'] = {
     country: 'Canada',
     manufacturer: 'Measurement Engineering Ltd',
     model_id: '#ID_Radio_Model',
-    model_path: '/worlds/BasicStart/assets/models/artifacts/Radio.glb'
+    image_id: '#ID_Radio_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/Radio.glb',
+    name: 'Receiver, radio',
+    description: 'TO RECEIVE, DEMODULATE & AMPLIFY AM AND SHORT WAVE (2 BANDS) STANDARD BROADCAST SIGNALS',
+    number: '845'
 };
 artifactList['Syringe'] = {
     artifact_id: 'Syringe',
@@ -60,7 +82,11 @@ artifactList['Syringe'] = {
     country: 'England',
     manufacturer: 'Down',
     model_id: '#ID_Syringe_Model',
-    model_path: '/worlds/BasicStart/assets/models/artifacts/Syringe.glb'
+    image_id: '#ID_Syringe_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/Syringe.glb',
+    name: 'Syringe, irrigation',
+    description: 'USED TO FLUSH EAR CANAL WITH WARM OIL & SALINE SOLUTION TO ORDER REMOVE WAX AND OTHER DEBRIS.',
+    number: '251'
 };
 
 // ID Naming Schemes:
@@ -136,26 +162,36 @@ function spawnArtifacts() {
         
                 objectUI.setAttribute('id', "ID_" + item.artifact_id + "_UI");
                 objectUI.setAttribute("floating-ui","");
-                objectUI.setAttribute("position", "0 " + (boundingBox.max.y - 0.7) + " 0"); 
+                objectUI.setAttribute("position", "0 " + (boundingBox.max.y - 1) + " 0"); 
         
                 //UI elements
                 //Background
                 let uiBG = document.createElement('a-entity');
-                uiBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
-                uiBG.setAttribute("scale", "0.8 0.5 0.1");
-                uiBG.setAttribute("material","color:blue");
+                //uiBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
+                uiBG.setAttribute("scale", "0.8 0.8 0.8");
+                uiBG.setAttribute("rotation", "0 90 0");
+                //uiBG.setAttribute("material","color:blue");
+                uiBG.setAttribute("gltf-model", "#ID_UI_Object_Info_Model");
+                        
+                //append geometry elements
+                uiBG = objectUI.appendChild(uiBG);
                 
-                //text
+                //stop model loading event from bubbling up and causing an infinite loop
+                uiBG.addEventListener('model-loaded', function (e) { 
+                    e.stopPropagation();
+                });
+
+                //===text===
                 let uiTex = document.createElement('a-entity');
-                uiTex.setAttribute("text", "value:Made in: " + item.country + 
-                "; color:white; font:roboto; width:0.5; anchor:left; baseline:top; wrapCount:18;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
-                uiTex.setAttribute("position", "-0.3 0.2 0.05");
-        
-                //append sub-elements
-                objectUI.appendChild(uiBG);
-                objectUI.appendChild(uiTex);
-        
-        
+                uiTex.setAttribute("text", "value:" + item.name + 
+                "; color:white; font:mozillavr; width:0.6; anchor:left; baseline:top; wrapCount:18;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+                uiTex.setAttribute("position", "-0.35 0.57 0.01");
+
+                //append text
+                uiTex = objectUI.appendChild(uiTex);
+
+
+
                 //Append ui to the artifact
                 newObject.appendChild(objectUI);    
         
