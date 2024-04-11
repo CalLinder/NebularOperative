@@ -184,14 +184,6 @@ function spawnArtifacts() {
                 imgUI.setAttribute("material", "src:#ID_" + item.artifact_id + "_IMG; shader:flat; transparent:true;" );
                 imgUI.setAttribute("position", "-0.225 0.3 0.01" );
 
-                //append geometry elements
-                uiBG = objectUI.appendChild(uiBG);
-                imgUI = objectUI.appendChild(imgUI);
-                
-                //stop model loading event from bubbling up and causing an infinite loop
-                uiBG.addEventListener('model-loaded', function (e) { 
-                    e.stopPropagation();
-                });
 
                 //===text===
                 let uiTex_Title = document.createElement('a-entity');
@@ -201,12 +193,31 @@ function spawnArtifacts() {
 
                 let uiTex_Desc = document.createElement('a-entity');
                 uiTex_Desc.setAttribute("text", "value:" + item.description + 
-                "; color:white; font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:22;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+                "; color:rgb(0, 251, 255); font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:22;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
                 uiTex_Desc.setAttribute("position", "-0.07 0.43 0.01");
 
-                //append text
+                let uiTex_Check = document.createElement('a-entity');
+                uiTex_Check.setAttribute("text", "value:; color:white; font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:11;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+                uiTex_Check.setAttribute("position", "-0.07 0.12 0.01");
+
+                //append all elemetns
+
+                //Append check text first since child index matters
+                uiTex_Check = objectUI.appendChild(uiTex_Check);
+
+                //append geometry elements
+                uiBG = objectUI.appendChild(uiBG);
+                imgUI = objectUI.appendChild(imgUI);
+                
+                //stop model loading event from bubbling up and causing an infinite loop
+                uiBG.addEventListener('model-loaded', function (e) { 
+                    e.stopPropagation();
+                });
+                
+                //Append remaining text
                 uiTex_Title = objectUI.appendChild(uiTex_Title);
                 uiTex_Desc = objectUI.appendChild(uiTex_Desc);
+
 
 
 
