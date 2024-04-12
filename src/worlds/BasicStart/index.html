@@ -4,15 +4,15 @@
   <circles-start-scripts/>
   <!-- Physics script goes after the Circles' head scripts [IMPORTANT]-->
   <script src="/global/js/libs/aframe-physics-system.min.js"></script>
-  <script src="/worlds/BasicStart/components/physics-object.js"></script>
   <!--Other Components -->
   <script src="/worlds/BasicStart/components/floating-ui.js"></script>
   <script src="/worlds/BasicStart/components/item-pickup-drop-manager.js"></script>
   <script src="/worlds/BasicStart/components/item-checker.js"></script>
   <script src="/worlds/BasicStart/components/screen.js"></script>
   <script src="/worlds/BasicStart/components/game-master.js"></script>
-  <!-- Artifact Spawning Script -->
+  <!-- Artifact Handling Components -->
   <script src="/worlds/BasicStart/scripts/spawn-artifacts.js"></script>
+  <script src="/worlds/BasicStart/components/artifact-component.js"></script>
   <!-- Game Master Script -->
   <script src="/worlds/BasicStart/scripts/game-setup.js"></script>
   <!-- External Library Dependancies -->
@@ -35,11 +35,11 @@
       <circles-assets/>
 
       <!-- Spawnpoint -->
-      <a-entity circles-checkpoint circles-spawnpoint position="-9 0 0"></a-entity>
+      <a-entity circles-checkpoint circles-spawnpoint position="-9 0 0" rotation="0 -90 0"></a-entity>
 
       <!-- Environment (.glb) & Navmesh Models -->
-      <a-asset-item id="ID_Environment_Model" src="/worlds/BasicStart/assets/models/Environment_V2.glb" response-type="arraybuffer"></a-asset-item>
-      <a-asset-item id="ID_Navmesh_Model" src="/worlds/BasicStart/assets/models/Navmesh_V2.glb" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_Environment_Model" src="/worlds/BasicStart/assets/models/Environment.glb" response-type="arraybuffer" timeout="10000"></a-asset-item>
+      <a-asset-item id="ID_Navmesh_Model" src="/worlds/BasicStart/assets/models/Navmesh.glb" response-type="arraybuffer"></a-asset-item>
       
       <!-- Artifact Models (.glb) -->
       <a-asset-item id="ID_Clock_Model" src="/worlds/BasicStart/assets/models/artifacts/Clock.glb" response-type="arraybuffer"></a-asset-item>
@@ -90,9 +90,44 @@
 
     <!-- Manager Components -->
     <a-entity item-pickup-drop-manager></a-entity>
+    <a-entity game-manager></a-entity>
+
+    <!-- Artifact Entities -->
+    <a-entity
+      id="ID_Artifact_Entity_1"
+      position="-9 1 -2"
+      rotation="0 0 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 0 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -2"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_2"
+      position="-9 1 -4"
+      rotation="0 0 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 0 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -4"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_3"
+      position="-9 1 -6"
+      rotation="0 0 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 0 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -6"
+    ></a-entity>
 
     <!-- Item Spawners -->
-    <a-box
+    <!-- <a-box
       id="ID_Artifact_Spawner_1"
       position="-9 1 -2"
       rotation="0 0 0"
@@ -120,8 +155,9 @@
       width="0.25"
       depth="0.25"
       color="tomato"
-    ></a-box>
+    ></a-box> -->
 
+    <!-- Item Checker -->
     <a-box
       id="ID_Artifact_Checker_1"
       position="-5 1 5"
@@ -135,8 +171,8 @@
     <!-- <a-entity obj-model="obj:#ID_UI_Game_Info_Model; mtl:#ID_UI_Game_Info_Mtl"></a-entity> -->
 
     <!-- Screens -->
-    <a-entity screen id="ID_Screen_1" position="-7.924 1.85045 8.802" geometry="primitive:box"></a-entity>
-    <a-entity screen id="ID_Screen_2" position="-20.98 1.85045 8.802" geometry="primitive:box"></a-entity>
+    <a-entity screen id="ID_Screen_1" position="-8.652 1.85045 8.802" geometry="primitive:box"></a-entity>
+    <a-entity screen id="ID_Screen_2" position="-21.542 1.85045 8.802" geometry="primitive:box"></a-entity>
     <!-- <a-box
       id="ID_Artifact_Checker_2"
       position="-3 1 5"
