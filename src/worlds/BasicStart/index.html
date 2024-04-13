@@ -10,6 +10,7 @@
   <script src="/worlds/BasicStart/components/item-checker.js"></script>
   <script src="/worlds/BasicStart/components/screen.js"></script>
   <script src="/worlds/BasicStart/components/game-master.js"></script>
+  <script src="/worlds/BasicStart/components/model-opacity.js"></script>
   <!-- Artifact Handling Components -->
   <script src="/worlds/BasicStart/scripts/spawn-artifacts.js"></script>
   <script src="/worlds/BasicStart/components/artifact-component.js"></script>
@@ -52,10 +53,6 @@
       <!-- UI Models (.obj and .mtl) -->
       <a-asset-item id="ID_UI_Game_Info_Model" src="/worlds/BasicStart/assets/models/ui/backup/UI_GameInfo.glb" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="ID_UI_Object_Info_Model" src="/worlds/BasicStart/assets/models/ui/backup/UI_ObjectInfo.glb" response-type="arraybuffer"></a-asset-item>
-
-      <a-asset-item id="ID_UI_Game_Info_Mtl" src="/worlds/BasicStart/assets/models/ui/UI_GameInfo.mtl" response-type="arraybuffer"></a-asset-item>
-      <a-asset-item id="ID_UI_Object_Info_Mtl" src="/worlds/BasicStart/assets/models/ui/UI_ObjectInfo.mtl" response-type="arraybuffer"></a-asset-item>
-
 
       <!-- Audio Files (.wav) -->
       <a-asset-item id="ID_Spaceship_Ambience_SFX" src="/worlds/BasicStart/assets/audio/SFX/Spaceship_Ambience.wav" response-type="arraybuffer"></a-asset-item>
@@ -203,6 +200,7 @@
       gltf-model="#ID_Environment_Model"
       position="0 0 0"
       shadow="receive: true; cast: true"
+      model-opacity="0.5f"
     ></a-entity>
 
     <a-entity

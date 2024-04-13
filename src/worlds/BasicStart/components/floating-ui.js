@@ -9,9 +9,6 @@ AFRAME.registerComponent('floating-ui', {
     //get a local reference to our entities and set some property variables
     const Context_AF = this;
 
-    //fade length (ms)
-    const fade = 200;
-
     Context_AF.el.setAttribute('look-at', '.avatar');
     Context_AF.el.setAttribute('material', 'opacity:"0.0f"');
     //define fade on and off aimations
@@ -30,9 +27,9 @@ AFRAME.registerComponent('floating-ui', {
       }
       else if(children[i].getAttribute('gltf-model'))
       {        
-        // children[i].setAttribute('circles-material-override', 'opacity:"0.0f"');
-        // children[i].setAttribute('animation__ON', {property:'circles-material-override.opacity', to:1.0, dur:fade, easing:'linear', enabled:false});
-        // children[i].setAttribute('animation__OFF', {property:'circles-material-override.opacity', to:0, dur:fade, easing:'linear', enabled:true});
+        children[i].setAttribute('model-opacity', 'opacity:"0.0f"');
+        children[i].setAttribute('animation__ON', {property:'model-opacity.opacity', to:1.0, dur:fade, easing:'linear', enabled:false});
+        children[i].setAttribute('animation__OFF', {property:'model-opacity.opacity', to:0, dur:fade, easing:'linear', enabled:true});
       }
       else
       {        
@@ -64,15 +61,17 @@ AFRAME.registerComponent('floating-ui', {
 
       if(Context_AF.el.getAttribute('animation__ON').enabled == false)
       {
-        //Context_AF.el.setAttribute('visible', 'true');
-        Context_AF.el.setAttribute('animation__ON', {enabled:true});
-        Context_AF.el.setAttribute('animation__OFF', {enabled:false});
+        Context_AF.el.setAttribute('visible', 'true');
+        setTimeout(function() {
+          Context_AF.el.setAttribute('animation__ON', {enabled:true});
+          Context_AF.el.setAttribute('animation__OFF', {enabled:false});
 
-        for(let i = 0; i < children.length; i++)
-        {
-          children[i].setAttribute('animation__ON', {enabled:true});
-          children[i].setAttribute('animation__OFF', {enabled:false});
-        }
+          for(let i = 0; i < children.length; i++)
+          {
+            children[i].setAttribute('animation__ON', {enabled:true});
+            children[i].setAttribute('animation__OFF', {enabled:false});
+          }
+        }, (fade/10));
 
       }
     }
@@ -80,7 +79,11 @@ AFRAME.registerComponent('floating-ui', {
     {
       if(Context_AF.el.getAttribute('animation__ON').enabled == true)
       {
-        //Context_AF.el.setAttribute('visible', 'false');
+        //disable the component 10% of fade time later than the fade
+        setTimeout(function() {
+          Context_AF.el.setAttribute('visible', 'false');
+        }, fade + (fade/10));
+        
         Context_AF.el.setAttribute('animation__ON', {enabled:false});
         Context_AF.el.setAttribute('animation__OFF', {enabled:true});
 
