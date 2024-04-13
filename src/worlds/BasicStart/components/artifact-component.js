@@ -37,7 +37,6 @@ AFRAME.registerComponent('artifact-component', {
             // guiBG.setAttribute("obj-model", "obj: #ID_UI_Object_Info_Model; mtl:#ID_UI_Object_Info_Mtl");
             // uiBG.setAttribute("shader", "flat" );
 
-
             //IMAGE
             let imgUI = document.createElement('a-entity');
             imgUI.setAttribute("geometry", "primitive:plane");
@@ -71,7 +70,9 @@ AFRAME.registerComponent('artifact-component', {
             imgUI = objectUI.appendChild(imgUI);
             
             //stop model loading event from bubbling up and causing an infinite loop
+            //also wait until model is loaded to add model-opacity
             uiBG.addEventListener('model-loaded', function (e) { 
+                uiBG.setAttribute("model-opacity", "0.0f");
                 e.stopPropagation();
             });
             
@@ -96,6 +97,7 @@ AFRAME.registerComponent('artifact-component', {
             guiBG.setAttribute("scale", "0.7 0.7 0.7");
             guiBG.setAttribute("rotation", "0 90 0");
             guiBG.setAttribute("gltf-model", "#ID_UI_Game_Info_Model");
+            // guiBG.setAttribute("model-opacity", "0.0f");
             // guiBG.setAttribute("circles-material-override", "");
             // guiBG.setAttribute("obj-model", "obj: #ID_UI_Game_Info_Model; mtl:#ID_UI_Game_Info_Mtl");
             // uiGameBG.setAttribute("shader", "flat" );
@@ -119,13 +121,16 @@ AFRAME.registerComponent('artifact-component', {
             guiBG = gameUI.appendChild(guiBG);
 
             //stop model loading event from bubbling up and causing an infinite loop
+            //also wait until model is loaded to add model-opacity
             guiBG.addEventListener('model-loaded', function (e) { 
+                guiBG.setAttribute("model-opacity", "0.0f"); 
                 e.stopPropagation();
             });
             
             //Append ui to the artifact
             CONTEXT_AF.el.appendChild(objectUI);    
             CONTEXT_AF.el.appendChild(gameUI);    
+
 
             //===CREATE UI CODE END===
         });

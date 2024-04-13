@@ -3,6 +3,8 @@
 // Global Vars
 const numArtifacts = 3; // Ensure there are enough ID_Artifact_Entity_[insert number]'s in scene to match numArtifacts
 const font = "dejavu";
+//ui fade length (ms)
+const fade = 200;
 
 // Test Values | Goal is 'OpticalLens' and therefore it MUST spawn in the round
 const challengeYear = '1943';
