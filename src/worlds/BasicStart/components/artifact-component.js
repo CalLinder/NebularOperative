@@ -33,6 +33,7 @@ AFRAME.registerComponent('artifact-component', {
             uiBG.setAttribute("scale", "0.8 0.8 0.8");
             uiBG.setAttribute("rotation", "0 90 0");
             uiBG.setAttribute("gltf-model", "#ID_UI_Object_Info_Model");
+            // uiBG.setAttribute("circles-material-override", "");
             // guiBG.setAttribute("obj-model", "obj: #ID_UI_Object_Info_Model; mtl:#ID_UI_Object_Info_Mtl");
             // uiBG.setAttribute("shader", "flat" );
 
@@ -48,16 +49,16 @@ AFRAME.registerComponent('artifact-component', {
             //===text===
             let uiTex_Title = document.createElement('a-entity');
             uiTex_Title.setAttribute("text", "value:" + item.name + 
-            "; color:white; font:"+ font +"; width:0.7; anchor:left; baseline:top; wrapCount:22;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+            "; color:white; font:"+ font +"; width:0.7; anchor:left; baseline:top; wrapCount:22;");
             uiTex_Title.setAttribute("position", "-0.36 0.53 0.01");
 
             let uiTex_Desc = document.createElement('a-entity');
             uiTex_Desc.setAttribute("text", "value:" + item.description + 
-            "; color:rgb(0, 251, 255); font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:22;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+            "; color:rgb(0, 251, 255); font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:22;");
             uiTex_Desc.setAttribute("position", "-0.07 0.43 0.01");
 
             let uiTex_Check = document.createElement('a-entity');
-            uiTex_Check.setAttribute("text", "value:; color:white; font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:11;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+            uiTex_Check.setAttribute("text", "value:; color:white; font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:11;");
             uiTex_Check.setAttribute("position", "-0.07 0.12 0.01");
 
             //append all elemetns
@@ -90,13 +91,29 @@ AFRAME.registerComponent('artifact-component', {
 
             //Game element bg
             let guiBG = document.createElement('a-entity');
-            //uiGameBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
+            //uiGameBG.setAttribute("geometry", "primitive:box");
             //uiGameBG.setAttribute("material","color:blue");
             guiBG.setAttribute("scale", "0.7 0.7 0.7");
             guiBG.setAttribute("rotation", "0 90 0");
             guiBG.setAttribute("gltf-model", "#ID_UI_Game_Info_Model");
+            // guiBG.setAttribute("circles-material-override", "");
             // guiBG.setAttribute("obj-model", "obj: #ID_UI_Game_Info_Model; mtl:#ID_UI_Game_Info_Mtl");
             // uiGameBG.setAttribute("shader", "flat" );
+            
+            //===text===
+            let guiTex_header = document.createElement('a-entity');
+            //TO DO: ADD ROLE ASSIGNMENT HERE: (IF ROLE == X ROLE, THEN FILL DATA IN AS APPROPRIATE - STATIC VALUES USED TEMPORARILY)
+            guiTex_header.setAttribute("text", "value:COUNTRY OF ORIGIN; color:rgb(0, 251, 255); font:"+ font +"; width:0.3; anchor:center; align:center; baseline:top; wrapCount:20;");
+            guiTex_header.setAttribute("position", "0 0.13 0.01");
+
+            //TO DO: ADD ROLE ASSIGNMENT HERE: (IF ROLE == X ROLE, THEN FILL DATA I AS APPROPRIATE - ITEM COUNTRY USED)
+            let guiTex_main = document.createElement('a-entity');
+            guiTex_main.setAttribute("text", "value:" + item.country + "; color:white; font:"+ font +"; width:0.65; anchor:center; align:center; baseline:top; wrapCount:25;");
+            guiTex_main.setAttribute("position", "0 0.085 0.01");
+
+            //append text
+            guiTex_header = gameUI.appendChild(guiTex_header);
+            guiTex_main = gameUI.appendChild(guiTex_main);
 
             //append game ui sub-objects
             guiBG = gameUI.appendChild(guiBG);

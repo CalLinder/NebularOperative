@@ -28,7 +28,12 @@ AFRAME.registerComponent('floating-ui', {
         children[i].setAttribute('animation__ON', {property:'text.opacity', to:1.0, dur:fade, easing:'linear', enabled:false});
         children[i].setAttribute('animation__OFF', {property:'text.opacity', to:0, dur:fade, easing:'linear', enabled:true});
       }
-
+      else if(children[i].getAttribute('gltf-model'))
+      {        
+        // children[i].setAttribute('circles-material-override', 'opacity:"0.0f"');
+        // children[i].setAttribute('animation__ON', {property:'circles-material-override.opacity', to:1.0, dur:fade, easing:'linear', enabled:false});
+        // children[i].setAttribute('animation__OFF', {property:'circles-material-override.opacity', to:0, dur:fade, easing:'linear', enabled:true});
+      }
       else
       {        
         children[i].setAttribute('material', 'opacity:"0.0f"');

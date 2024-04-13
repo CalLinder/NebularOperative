@@ -6,8 +6,8 @@ const font = "dejavu";
 
 // Test Values | Goal is 'OpticalLens' and therefore it MUST spawn in the round
 const challengeYear = '1943';
-const challengeCountry = 'England';
-const challengeManufacturer = 'National Physical Laboratories';
+const challengeCountry = 'ENGLAND';
+const challengeManufacturer = 'NATIONAL PHYSICAL LABORATORIES';
 // TO DO: Instead of challenge year, country, manufacturer, etc, it should be a range or clue (i.e., 1940-1950, continent, national manufacturer, etc)
 
 // Artifact Lists/Arrays/Objects
@@ -18,7 +18,7 @@ let artifactIDList = [];    // This array will contain a list of ID's for all ar
 artifactList['Clock'] = {
     artifact_id: 'Clock',
     year: '1912',
-    country: 'Unknown',
+    country: 'UNKNOWN',
     manufacturer: 'Waltham Watch Co.',
     model_id: '#ID_Clock_Model',
     image_id: '#ID_Clock_IMG',
@@ -32,7 +32,7 @@ artifactList['Clock'] = {
 artifactList['DiskDrive'] = {
     artifact_id: 'DiskDrive',
     year: '1969',
-    country: 'England',
+    country: 'ENGLAND',
     manufacturer: 'International Computers Ltd',
     model_id: '#ID_DiskDrive_Model',
     image_id: '#ID_DiskDrive_IMG',
@@ -44,7 +44,7 @@ artifactList['DiskDrive'] = {
 artifactList['Fridge'] = {
     artifact_id: 'Fridge',
     year: '1953',
-    country: 'United States of America',
+    country: 'UNITED STATES OF AMERICA',
     manufacturer: 'International Harvester Co.',
     model_id: '#ID_Fridge_Model',
     image_id: '#ID_Fridge_IMG',
@@ -56,8 +56,8 @@ artifactList['Fridge'] = {
 artifactList['OpticalLens'] = {
     artifact_id: 'OpticalLens',
     year: '1943',
-    country: 'England',
-    manufacturer: 'National Physical Laboratories',
+    country: 'ENGLAND',
+    manufacturer: 'NATIONAL PHYSICAL LABORATORIES',
     model_id: '#ID_OpticalLens_Model',
     image_id: '#ID_OpticalLens_IMG',
     model_path: '/worlds/BasicStart/assets/models/artifacts/OpticalLens.glb',
@@ -68,7 +68,7 @@ artifactList['OpticalLens'] = {
 artifactList['Radio'] = {
     artifact_id: 'Radio',
     year: '1948',
-    country: 'Canada',
+    country: 'CANADA',
     manufacturer: 'Measurement Engineering Ltd',
     model_id: '#ID_Radio_Model',
     image_id: '#ID_Radio_IMG',
@@ -80,7 +80,7 @@ artifactList['Radio'] = {
 artifactList['Syringe'] = {
     artifact_id: 'Syringe',
     year: 'Unknown',
-    country: 'England',
+    country: 'ENGLAND',
     manufacturer: 'Down',
     model_id: '#ID_Syringe_Model',
     image_id: '#ID_Syringe_IMG',
@@ -149,121 +149,121 @@ function spawnArtifacts() {
 }
 
 // Update artifact entities in scene to add UI, use artifact_num to select and artifact_id atribute to determine data from artifactList[]
-function spawnArtifactUI() {
-    // Loop through for each artifact that needs to be updated
-    for (let i = 1; i <= numArtifacts; i++) {
+// function spawnArtifactUI() {
+//     // Loop through for each artifact that needs to be updated
+//     for (let i = 1; i <= numArtifacts; i++) {
 
-        let item = artifactList[artifactIDList[i-1]];
+//         let item = artifactList[artifactIDList[i-1]];
 
-        // Select ID_Artifact_Entity_[i] a-entity element in scene
-        let artifactEl = document.querySelectorAll('[artifact_num="' + i + '"]');
-        console.log("DEBUG: " + artifactEl.getAttribute(id));
+//         // Select ID_Artifact_Entity_[i] a-entity element in scene
+//         let artifactEl = document.querySelectorAll('[artifact_num="' + i + '"]');
+//         console.log("DEBUG: " + artifactEl.getAttribute(id));
 
-        // ADEL UI STUFF -------------------------------------------------------------------------------
-        //create an event listner applied to all models to create their UI elements when the models are loaded
-        artifactEl.addEventListener('model-loaded', function () {
-            // Get the artifact's bounding box
-            let boundingBox = new THREE.Box3().setFromObject(artifactEl.object3D);
+//         // ADEL UI STUFF -------------------------------------------------------------------------------
+//         //create an event listner applied to all models to create their UI elements when the models are loaded
+//         artifactEl.addEventListener('model-loaded', function () {
+//             // Get the artifact's bounding box
+//             let boundingBox = new THREE.Box3().setFromObject(artifactEl.object3D);
                     
-            //===CREATE UI CODE===
+//             //===CREATE UI CODE===
 
-            //Create ui object
-            let objectUI = document.createElement('a-entity');
+//             //Create ui object
+//             let objectUI = document.createElement('a-entity');
 
-            objectUI.setAttribute('id', "ID_" + item.artifact_id + "_UI");
-            objectUI.setAttribute("floating-ui","");
-            objectUI.setAttribute("position", "0 " + (boundingBox.max.y - 1) + " 0"); 
-            objectUI.setAttribute("rotation", "0 90 0"); 
+//             objectUI.setAttribute('id', "ID_" + item.artifact_id + "_UI");
+//             objectUI.setAttribute("floating-ui","");
+//             objectUI.setAttribute("position", "0 " + (boundingBox.max.y - 1) + " 0"); 
+//             objectUI.setAttribute("rotation", "0 90 0"); 
 
-            //UI elements
-            //Background
-            let uiBG = document.createElement('a-entity');
-            //uiBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
-            //uiBG.setAttribute("material","color:blue");
-            uiBG.setAttribute("scale", "0.8 0.8 0.8");
-            uiBG.setAttribute("rotation", "0 90 0");
-            uiBG.setAttribute("gltf-model", "#ID_UI_Object_Info_Model");
-            // guiBG.setAttribute("obj-model", "obj: #ID_UI_Object_Info_Model; mtl:#ID_UI_Object_Info_Mtl");
-            // uiBG.setAttribute("shader", "flat" );
-
-
-            //IMAGE
-            let imgUI = document.createElement('a-entity');
-            imgUI.setAttribute("geometry", "primitive:plane");
-            imgUI.setAttribute("scale", "0.25 0.25 1");
-            imgUI.setAttribute("material", "src:#ID_" + item.artifact_id + "_IMG; shader:flat; transparent:true;" );
-            imgUI.setAttribute("position", "-0.225 0.3 0.01" );
+//             //UI elements
+//             //Background
+//             let uiBG = document.createElement('a-entity');
+//             //uiBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
+//             //uiBG.setAttribute("material","color:blue");
+//             uiBG.setAttribute("scale", "0.8 0.8 0.8");
+//             uiBG.setAttribute("rotation", "0 90 0");
+//             uiBG.setAttribute("gltf-model", "#ID_UI_Object_Info_Model");
+//             // guiBG.setAttribute("obj-model", "obj: #ID_UI_Object_Info_Model; mtl:#ID_UI_Object_Info_Mtl");
+//             // uiBG.setAttribute("shader", "flat" );
 
 
-            //===text===
-            let uiTex_Title = document.createElement('a-entity');
-            uiTex_Title.setAttribute("text", "value:" + item.name + 
-            "; color:white; font:"+ font +"; width:0.7; anchor:left; baseline:top; wrapCount:22;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
-            uiTex_Title.setAttribute("position", "-0.36 0.53 0.01");
+//             //IMAGE
+//             let imgUI = document.createElement('a-entity');
+//             imgUI.setAttribute("geometry", "primitive:plane");
+//             imgUI.setAttribute("scale", "0.25 0.25 1");
+//             imgUI.setAttribute("material", "src:#ID_" + item.artifact_id + "_IMG; shader:flat; transparent:true;" );
+//             imgUI.setAttribute("position", "-0.225 0.3 0.01" );
 
-            let uiTex_Desc = document.createElement('a-entity');
-            uiTex_Desc.setAttribute("text", "value:" + item.description + 
-            "; color:rgb(0, 251, 255); font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:22;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
-            uiTex_Desc.setAttribute("position", "-0.07 0.43 0.01");
 
-            let uiTex_Check = document.createElement('a-entity');
-            uiTex_Check.setAttribute("text", "value:; color:white; font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:11;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
-            uiTex_Check.setAttribute("position", "-0.07 0.12 0.01");
+//             //===text===
+//             let uiTex_Title = document.createElement('a-entity');
+//             uiTex_Title.setAttribute("text", "value:" + item.name + 
+//             "; color:white; font:"+ font +"; width:0.7; anchor:left; baseline:top; wrapCount:22;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+//             uiTex_Title.setAttribute("position", "-0.36 0.53 0.01");
 
-            //append all elemetns
+//             let uiTex_Desc = document.createElement('a-entity');
+//             uiTex_Desc.setAttribute("text", "value:" + item.description + 
+//             "; color:rgb(0, 251, 255); font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:22;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+//             uiTex_Desc.setAttribute("position", "-0.07 0.43 0.01");
 
-            //Append check text first since child index matters
-            uiTex_Check = objectUI.appendChild(uiTex_Check);
+//             let uiTex_Check = document.createElement('a-entity');
+//             uiTex_Check.setAttribute("text", "value:; color:white; font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:11;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+//             uiTex_Check.setAttribute("position", "-0.07 0.12 0.01");
 
-            //append geometry elements
-            uiBG = objectUI.appendChild(uiBG);
-            imgUI = objectUI.appendChild(imgUI);
+//             //append all elemetns
+
+//             //Append check text first since child index matters
+//             uiTex_Check = objectUI.appendChild(uiTex_Check);
+
+//             //append geometry elements
+//             uiBG = objectUI.appendChild(uiBG);
+//             imgUI = objectUI.appendChild(imgUI);
             
-            //stop model loading event from bubbling up and causing an infinite loop
-            uiBG.addEventListener('model-loaded', function (e) { 
-                e.stopPropagation();
-            });
+//             //stop model loading event from bubbling up and causing an infinite loop
+//             uiBG.addEventListener('model-loaded', function (e) { 
+//                 e.stopPropagation();
+//             });
             
-            //Append remaining text
-            uiTex_Title = objectUI.appendChild(uiTex_Title);
-            uiTex_Desc = objectUI.appendChild(uiTex_Desc);
+//             //Append remaining text
+//             uiTex_Title = objectUI.appendChild(uiTex_Title);
+//             uiTex_Desc = objectUI.appendChild(uiTex_Desc);
 
-            //create game UI
+//             //create game UI
 
-            //Create ui object
-            let gameUI = document.createElement('a-entity');
+//             //Create ui object
+//             let gameUI = document.createElement('a-entity');
 
-            gameUI.setAttribute('id', "ID_" + item.artifact_id + "_Game_UI");
-            gameUI.setAttribute("floating-ui","");
-            gameUI.setAttribute("position", "0.5 -0.05 0"); 
-            gameUI.setAttribute("rotation", "0 90 0");
+//             gameUI.setAttribute('id', "ID_" + item.artifact_id + "_Game_UI");
+//             gameUI.setAttribute("floating-ui","");
+//             gameUI.setAttribute("position", "0.5 -0.05 0"); 
+//             gameUI.setAttribute("rotation", "0 90 0");
 
-            //Game element bg
-            let guiBG = document.createElement('a-entity');
-            //uiGameBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
-            //uiGameBG.setAttribute("material","color:blue");
-            guiBG.setAttribute("scale", "0.7 0.7 0.7");
-            guiBG.setAttribute("rotation", "0 90 0");
-            guiBG.setAttribute("gltf-model", "#ID_UI_Game_Info_Model");
-            // guiBG.setAttribute("obj-model", "obj: #ID_UI_Game_Info_Model; mtl:#ID_UI_Game_Info_Mtl");
-            // uiGameBG.setAttribute("shader", "flat" );
+//             //Game element bg
+//             let guiBG = document.createElement('a-entity');
+//             //uiGameBG.setAttribute("geometry", "primitive:box"); //TO DO: CHANGE THIS TO CUSTOM GLTF AND ADD IMAGES
+//             //uiGameBG.setAttribute("material","color:blue");
+//             guiBG.setAttribute("scale", "0.7 0.7 0.7");
+//             guiBG.setAttribute("rotation", "0 90 0");
+//             guiBG.setAttribute("gltf-model", "#ID_UI_Game_Info_Model");
+//             // guiBG.setAttribute("obj-model", "obj: #ID_UI_Game_Info_Model; mtl:#ID_UI_Game_Info_Mtl");
+//             // uiGameBG.setAttribute("shader", "flat" );
 
-            //append game ui sub-objects
-            guiBG = gameUI.appendChild(guiBG);
+//             //append game ui sub-objects
+//             guiBG = gameUI.appendChild(guiBG);
 
-            //stop model loading event from bubbling up and causing an infinite loop
-            guiBG.addEventListener('model-loaded', function (e) { 
-                e.stopPropagation();
-            });
+//             //stop model loading event from bubbling up and causing an infinite loop
+//             guiBG.addEventListener('model-loaded', function (e) { 
+//                 e.stopPropagation();
+//             });
             
-            //Append ui to the artifact
-            artifactEl.appendChild(objectUI);    
-            artifactEl.appendChild(gameUI);    
+//             //Append ui to the artifact
+//             artifactEl.appendChild(objectUI);    
+//             artifactEl.appendChild(gameUI);    
 
-            //===CREATE UI CODE END===
-        });
-    }
-}
+//             //===CREATE UI CODE END===
+//         });
+//     }
+// }
 
 // Returns the ID of the artifact with all of the target aspects (there should only be 1)
 function returnArtifactsByAll(targetYear, targetCountry, targetManufacturer) {
