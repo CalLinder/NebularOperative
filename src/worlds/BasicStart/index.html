@@ -4,18 +4,18 @@
   <circles-start-scripts/>
   <!-- Physics script goes after the Circles' head scripts [IMPORTANT]-->
   <script src="/global/js/libs/aframe-physics-system.min.js"></script>
+  <!-- Game Master Component and Script -->
+  <script src="/worlds/BasicStart/scripts/game-setup.js"></script>
+  <script src="/worlds/BasicStart/components/game-manager.js"></script>
+  <!-- Artifact Handling Component and Script -->
+  <script src="/worlds/BasicStart/scripts/spawn-artifacts.js"></script>
+  <script src="/worlds/BasicStart/components/artifact-component.js"></script>
   <!--Other Components -->
   <script src="/worlds/BasicStart/components/floating-ui.js"></script>
   <script src="/worlds/BasicStart/components/item-pickup-drop-manager.js"></script>
   <script src="/worlds/BasicStart/components/item-checker.js"></script>
   <script src="/worlds/BasicStart/components/screen.js"></script>
-  <script src="/worlds/BasicStart/components/game-master.js"></script>
   <script src="/worlds/BasicStart/components/model-opacity.js"></script>
-  <!-- Artifact Handling Components -->
-  <script src="/worlds/BasicStart/scripts/spawn-artifacts.js"></script>
-  <script src="/worlds/BasicStart/components/artifact-component.js"></script>
-  <!-- Game Master Script -->
-  <script src="/worlds/BasicStart/scripts/game-setup.js"></script>
   <!-- External Library Dependancies -->
   <!-- A-Frame Look-At -->
   <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script> 
@@ -36,7 +36,7 @@
       <circles-assets/>
 
       <!-- Spawnpoint -->
-      <a-entity circles-checkpoint circles-spawnpoint position="-9 0 0" rotation="0 -90 0"></a-entity>
+      <a-entity circles-checkpoint circles-spawnpoint position="-9 0 0"></a-entity>
 
       <!-- Environment (.glb) & Navmesh Models -->
       <a-asset-item id="ID_Environment_Model" src="/worlds/BasicStart/assets/models/Environment.glb" response-type="arraybuffer" timeout="10000"></a-asset-item>
@@ -87,7 +87,7 @@
 
     <!-- Manager Components -->
     <a-entity item-pickup-drop-manager></a-entity>
-    <a-entity game-manager></a-entity>
+    <a-entity game-manager id='ID_Game_Manager'></a-entity>
 
     <!-- Artifact Entities -->
     <a-entity
@@ -98,7 +98,7 @@
       gltf-model=""
       artifact-component
       circles-pickup-networked
-      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 0 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -2"
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -1 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -2"
     ></a-entity>
     
     <a-entity
@@ -109,7 +109,7 @@
       gltf-model=""
       artifact-component
       circles-pickup-networked
-      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 0 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -4"
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -1 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -4"
     ></a-entity>
     
     <a-entity
@@ -120,7 +120,7 @@
       gltf-model=""
       artifact-component
       circles-pickup-networked
-      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 0 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -6"
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -1 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -6"
     ></a-entity>
 
     <!-- Item Spawners -->

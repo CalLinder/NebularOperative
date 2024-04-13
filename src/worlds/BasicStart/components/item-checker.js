@@ -35,11 +35,15 @@ schema: {
                         e.detail.item.setAttribute("position", + vecSpawnToChecker.x + " " + vecSpawnToChecker.y + " " + vecSpawnToChecker.z);
                         e.detail.item.setAttribute("rotation", "0 90 0");
 
+                        console.log('DEBUG 1'); // remove after debugging
+
                         //update values
                         CONTEXT_AF.item = e.detail.item;
 
                         //initiate checking sequence
                         CONTEXT_AF.item.setAttribute("circles-interactive-object", "enabled: false");
+
+                        console.log('DEBUG 2'); // remove after debugging
 
                         // Pause for a beat
                         setTimeout(function() {
@@ -47,8 +51,15 @@ schema: {
                             //Start checking
                             audioSFXPlayer.setAttribute("circles-sound", "state: play");
 
+                            console.log('DEBUG 3'); // remove after debugging
+                            console.log(CONTEXT_AF.item); // remove after debugging
+                            console.log(CONTEXT_AF.item.childNodes[0]); // remove after debugging
+                            console.log(CONTEXT_AF.item.childNodes[0].childNodes[0]); // remove after debugging
+
                             //Change UI background's colour for this object
                             CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("text","value:CHECKING...; color:yellow");
+
+                            console.log('DEBUG 4'); // remove after debugging
 
                             //Checked
                             setTimeout(function() {
@@ -68,9 +79,12 @@ schema: {
                                     audioSFXPlayer.setAttribute("circles-sound", {src: "#ID_Correct_Item_SFX", state: "stop"});
                                     audioSFXPlayer.setAttribute("circles-sound", "state: play");
 
+                                    console.log('DEBUG 5'); // remove after debugging
+
                                     //update colour
                                     CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("text","value:CORRECT; color:green");
 
+                                    console.log('DEBUG 6'); // remove after debugging
 
                                 }
                                 //if incorrect item
@@ -80,14 +94,19 @@ schema: {
                                     audioSFXPlayer.setAttribute("circles-sound", {src: "#ID_Wrong_Item_SFX", state: "stop"});
                                     audioSFXPlayer.setAttribute("circles-sound", "state: play");
                                     
+                                    console.log('DEBUG 7'); // remove after debugging
+
                                     //update colour
                                     CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("text","value:INCORRECT; color:red");
+                                    console.log('DEBUG 8'); // remove after debugging
                                 }
 
                                 //wait a bit and reset
                                 setTimeout(function() {
                                     audioSFXPlayer.setAttribute("circles-sound", {src: "#ID_Checking_Item_SFX", state: "stop"});
+                                    console.log('DEBUG 9'); // remove after debugging
                                     CONTEXT_AF.item.setAttribute("circles-interactive-object", "enabled: true");
+                                    console.log('DEBUG 10'); // remove after debugging
                                 }, 1000);
 
                             }, 3103);
