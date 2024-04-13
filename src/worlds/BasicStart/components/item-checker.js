@@ -23,7 +23,7 @@ schema: {
             {
 
                 //If player is close enough to the checker
-                if((CONTEXT_AF.el.object3D.position.distanceTo(document.querySelector('#Player1').object3D.position) <= 3)) //CHANGE THIS VALUE TO INCREASE DROP SNAP RADIUS
+                if((CONTEXT_AF.el.object3D.position.distanceTo(document.querySelector('#Player1').object3D.position) <= 5)) //CHANGE THIS VALUE TO INCREASE DROP SNAP RADIUS
                 {
                     //if no item is already placed
                     if(CONTEXT_AF.item == null)
@@ -33,6 +33,7 @@ schema: {
 
                         //have the object be placed on the checker instead of its spawn point
                         e.detail.item.setAttribute("position", + vecSpawnToChecker.x + " " + vecSpawnToChecker.y + " " + vecSpawnToChecker.z);
+                        e.detail.item.setAttribute("rotation", "0 90 0");
 
                         //update values
                         CONTEXT_AF.item = e.detail.item;

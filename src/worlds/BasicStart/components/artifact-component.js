@@ -33,6 +33,7 @@ AFRAME.registerComponent('artifact-component', {
             uiBG.setAttribute("scale", "0.8 0.8 0.8");
             uiBG.setAttribute("rotation", "0 90 0");
             uiBG.setAttribute("gltf-model", "#ID_UI_Object_Info_Model");
+            // uiBG.setAttribute("circles-material-override", "");
             // guiBG.setAttribute("obj-model", "obj: #ID_UI_Object_Info_Model; mtl:#ID_UI_Object_Info_Mtl");
             // uiBG.setAttribute("shader", "flat" );
 
@@ -95,6 +96,7 @@ AFRAME.registerComponent('artifact-component', {
             guiBG.setAttribute("scale", "0.7 0.7 0.7");
             guiBG.setAttribute("rotation", "0 90 0");
             guiBG.setAttribute("gltf-model", "#ID_UI_Game_Info_Model");
+            // guiBG.setAttribute("circles-material-override", "");
             // guiBG.setAttribute("obj-model", "obj: #ID_UI_Game_Info_Model; mtl:#ID_UI_Game_Info_Mtl");
             // uiGameBG.setAttribute("shader", "flat" );
             
