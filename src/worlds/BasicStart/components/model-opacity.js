@@ -2,12 +2,16 @@
 
 AFRAME.registerComponent('model-opacity', {
     schema: { opacity: { default: 1.0 } },
+    
     update: function () {
         var mesh = this.el.getObject3D('mesh');
         var data = this.data;
         if (!mesh) { return; }
+
         mesh.traverse(function (node) {
             if (node.isMesh) {
+                node.renderOrder = 100;
+                node.material.depthTest = false;
                 node.material.opacity = data.opacity;
                 node.material.transparent = data.opacity < 1.0;
                 node.material.needsUpdate = true;

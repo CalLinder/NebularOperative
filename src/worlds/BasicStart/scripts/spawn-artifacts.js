@@ -92,6 +92,18 @@ artifactList['Syringe'] = {
     number: '251'
 };
 
+//change some a-scene properties
+// let scene = document.querySelector('a-scene');
+// scene.setAttribute("renderer","sortObjects:true");
+// scene.setAttribute("renderer","antialias:true");
+// scene.setAttribute("colormanagement","antialias:true");
+// scene.setAttribute("foveationLevel:","3");
+// scene.setAttribute("highRefreshRate:","true");
+// scene.setAttribute("physicallyCorrectLights:","true");
+// scene.setAttribute("logarithmicDepthBuffer:","false");
+// scene.setAttribute("precision:","high");
+// console.log(scene);
+
 // ID Naming Schemes:
 // Arifact Spawners: ID_Artifact_Spawner_[insert number]
 
@@ -101,6 +113,10 @@ function setupArtifacts() {
     console.log('setupArtifacts() running');    //Debug message
 
     //determine challenge process should be here or even better it would be networked
+    
+    //change some a-scene properties
+    let scene = document.querySelector('a-scene');
+    scene.setAttribute("renderer","sortObjects:true; antialias:true; colormanagement:true; foveationLevel:3; highRefreshRate:true;physicallyCorrectLights:true;logarithmicDepthBuffer:false;precision:high;");
     
     //set artifactIDList[0] to be the target artifact ID
     artifactIDList.push(returnArtifactsByAll(challengeYear, challengeCountry, challengeManufacturer));

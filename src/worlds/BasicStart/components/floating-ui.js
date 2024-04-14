@@ -17,10 +17,12 @@ AFRAME.registerComponent('floating-ui', {
 
     let children = Context_AF.el.children;
 
-    for(let i = 0; i < children.length; i++)
+    for(let i = 0; i < children.length; i++) 
     {
       if(children[i].getAttribute('text'))
       {
+        children[i].object3D.renderOrder = 100;
+        children[i].setAttribute("material", "depthTest:false");
         children[i].setAttribute('text', 'opacity:"0.0f"');
         children[i].setAttribute('animation__ON', {property:'text.opacity', to:1.0, dur:fade, easing:'linear', enabled:false});
         children[i].setAttribute('animation__OFF', {property:'text.opacity', to:0, dur:fade, easing:'linear', enabled:true});
