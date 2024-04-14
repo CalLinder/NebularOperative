@@ -63,6 +63,7 @@ AFRAME.registerComponent('artifact-component', {
             let uiTex_Check = document.createElement('a-entity');
             uiTex_Check.setAttribute("text", "value:; color:white; font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:11;");
             uiTex_Check.setAttribute("position", "-0.07 0.12 0.01");
+            uiTex_Check.setAttribute("class", "check_text");
 
             //append all elemetns
 
@@ -188,7 +189,9 @@ function createNonHostUI() {
                 item = artifactList[Object.keys(artifactList)[j]];
             }
         }
-            
+        
+        artifactEntities[i - 1].addEventListener('model-loaded', function () {
+
         // Get the artifact's bounding box
         let boundingBox = new THREE.Box3().setFromObject(artifactEntities[i - 1].object3D);
                 
@@ -236,6 +239,7 @@ function createNonHostUI() {
         let uiTex_Check = document.createElement('a-entity');
         uiTex_Check.setAttribute("text", "value:; color:white; font:"+ font +"; width:0.4; anchor:left; baseline:top; wrapCount:11;");
         uiTex_Check.setAttribute("position", "-0.07 0.12 0.01");
+        uiTex_Check.setAttribute("class", "check_text");
 
         //append all elemetns
 
@@ -308,6 +312,7 @@ function createNonHostUI() {
         artifactEntities[i - 1].appendChild(objectUI);    
         artifactEntities[i - 1].appendChild(gameUI);    
 
-        //===CREATE UI CODE END===
+        //===CREATE UI CODE END===\
+        });
     }
 }

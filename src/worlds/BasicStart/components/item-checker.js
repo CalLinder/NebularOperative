@@ -48,24 +48,25 @@ schema: {
                         // Pause for a beat
                         setTimeout(function() {
 
+                            //Get item ID from element ID
+                            let itemID = CONTEXT_AF.item.getAttribute("artifact_id").split("_")[1];
+                            let checkerTextEl = CONTEXT_AF.item.querySelector(".check_text");
+
                             //Start checking
                             audioSFXPlayer.setAttribute("circles-sound", "state: play");
 
                             console.log('DEBUG 3'); // remove after debugging
                             console.log(CONTEXT_AF.item); // remove after debugging
-                            console.log(CONTEXT_AF.item.childNodes[0]); // remove after debugging
+                            console.log(CONTEXT_AF.item.childNodes); // remove after debugging
                             console.log(CONTEXT_AF.item.childNodes[0].childNodes[0]); // remove after debugging
 
                             //Change UI background's colour for this object
-                            CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("text","value:CHECKING...; color:yellow");
+                            checkerTextEl.setAttribute("text","value:CHECKING...; color:yellow");
 
                             console.log('DEBUG 4'); // remove after debugging
 
                             //Checked
                             setTimeout(function() {
-
-                                //Get item ID from element ID
-                                let itemID = CONTEXT_AF.item.getAttribute("artifact_id").split("_")[1];
 
                                 //check the item placed on the checker's ID against the stored challenge values
                                 //If correct item
@@ -82,7 +83,7 @@ schema: {
                                     console.log('DEBUG 5'); // remove after debugging
 
                                     //update colour
-                                    CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("text","value:CORRECT; color:green");
+                                    checkerTextEl.setAttribute("text","value:CORRECT; color:green");
 
                                     console.log('DEBUG 6'); // remove after debugging
 
@@ -97,7 +98,7 @@ schema: {
                                     console.log('DEBUG 7'); // remove after debugging
 
                                     //update colour
-                                    CONTEXT_AF.item.childNodes[0].childNodes[0].setAttribute("text","value:INCORRECT; color:red");
+                                    checkerTextEl.setAttribute("text","value:INCORRECT; color:red");
                                     console.log('DEBUG 8'); // remove after debugging
                                 }
 
