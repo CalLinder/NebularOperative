@@ -22,7 +22,7 @@ AFRAME.registerComponent('floating-ui', {
       if(children[i].getAttribute('text'))
       {
         children[i].object3D.renderOrder = 100;
-        children[i].setAttribute("material", "depthTest:false");
+        children[i].setAttribute("text", "depthTest:false");
         children[i].setAttribute('text', 'opacity:"0.0f"');
         children[i].setAttribute('animation__ON', {property:'text.opacity', to:1.0, dur:fade, easing:'linear', enabled:false});
         children[i].setAttribute('animation__OFF', {property:'text.opacity', to:0, dur:fade, easing:'linear', enabled:true});
@@ -34,7 +34,9 @@ AFRAME.registerComponent('floating-ui', {
         children[i].setAttribute('animation__OFF', {property:'model-opacity.opacity', to:0, dur:fade, easing:'linear', enabled:true});
       }
       else
-      {        
+      {
+        children[i].object3D.renderOrder = 100;
+        children[i].setAttribute("material", "depthTest:false");        
         children[i].setAttribute('material', 'opacity:"0.0f"');
         children[i].setAttribute('animation__ON', {property:'material.opacity', to:1.0, dur:fade, easing:'linear', enabled:false});
         children[i].setAttribute('animation__OFF', {property:'material.opacity', to:0, dur:fade, easing:'linear', enabled:true});
