@@ -92,7 +92,7 @@ AFRAME.registerComponent('artifact-component', {
 
             gameUI.setAttribute('id', "ID_" + item.artifact_id + "_Game_UI");
             gameUI.setAttribute("floating-ui","");
-            gameUI.setAttribute("position", "0.5 -0.05 0"); 
+            gameUI.setAttribute("position", "0.3 -0.1 0"); 
             gameUI.setAttribute("rotation", "0 90 0");
 
             //Game element bg
@@ -268,7 +268,7 @@ function createNonHostUI() {
 
         gameUI.setAttribute('id', "ID_" + item.artifact_id + "_Game_UI");
         gameUI.setAttribute("floating-ui","");
-        gameUI.setAttribute("position", "0.5 -0.05 0"); 
+        gameUI.setAttribute("position", "0.3 -0.1 0"); 
         gameUI.setAttribute("rotation", "0 90 0");
 
         //Game element bg
