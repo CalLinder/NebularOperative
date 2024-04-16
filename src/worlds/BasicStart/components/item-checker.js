@@ -44,21 +44,26 @@ schema: {
                         CONTEXT_AF.item.setAttribute("circles-interactive-object", "enabled: false");
 
                         console.log('DEBUG 2'); // remove after debugging
+                        console.log(CONTEXT_AF.item);
 
                         // Pause for a beat
                         setTimeout(function() {
 
+                            // Get artifactList[] data for relevant artifact
+                            for (let j = 0; j < Object.keys(artifactList).length; j++) {
+                                if (artifactList[Object.keys(artifactList)[j]].model_path == CONTEXT_AF.item.getAttribute('gltf-model')) {
+                                    CONTEXT_AF.itemListEntry = artifactList[Object.keys(artifactList)[j]];
+                                }
+                            }
+
                             //Get item ID from element ID
-                            let itemID = CONTEXT_AF.item.getAttribute("artifact_id").split("_")[1];
+                            let itemID = CONTEXT_AF.itemListEntry.artifact_id;
                             let checkerTextEl = CONTEXT_AF.item.querySelector(".check_text");
 
                             //Start checking
                             audioSFXPlayer.setAttribute("circles-sound", "state: play");
 
                             console.log('DEBUG 3'); // remove after debugging
-                            console.log(CONTEXT_AF.item); // remove after debugging
-                            console.log(CONTEXT_AF.item.childNodes); // remove after debugging
-                            console.log(CONTEXT_AF.item.childNodes[0].childNodes[0]); // remove after debugging
 
                             //Change UI background's colour for this object
                             checkerTextEl.setAttribute("text","value:CHECKING...; color:yellow");

@@ -173,8 +173,8 @@ function createNonHostUI() {
     let networkedEntities = document.querySelectorAll('[id^="naf-"]');
     for (let i = 0; i <= networkedEntities.length - 1; i++) {
         if (networkedEntities[i].classList.contains('interactive')) {
-            console.log(networkedEntities[i].getAttribute('id'));
-            console.log(networkedEntities[i].getAttribute('gltf-model'));
+            console.log(networkedEntities[i].getAttribute('id'));   // Debug statement
+            console.log(networkedEntities[i].getAttribute('gltf-model'));   // Debug Statement
             artifactEntities.push(networkedEntities[i]);
         }
     }
@@ -190,8 +190,8 @@ function createNonHostUI() {
             }
         }
         
-        artifactEntities[i - 1].addEventListener('model-loaded', function () {
-
+        artifactEntities[i - 1].flushToDOM();
+        
         // Get the artifact's bounding box
         let boundingBox = new THREE.Box3().setFromObject(artifactEntities[i - 1].object3D);
                 
@@ -310,9 +310,9 @@ function createNonHostUI() {
         
         //Append ui to the artifact
         artifactEntities[i - 1].appendChild(objectUI);    
-        artifactEntities[i - 1].appendChild(gameUI);    
-
+        artifactEntities[i - 1].appendChild(gameUI);
+        
         //===CREATE UI CODE END===\
-        });
+        
     }
 }

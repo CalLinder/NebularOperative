@@ -12,6 +12,30 @@ AFRAME.registerComponent('game-manager', {
         
         console.log('Game Manager Initiating'); //debug statement
 
+        // Game Setup Stuff
+        console.log('setupGame() running');    //Debug message
+
+        // Delay by 2 seconds, otherwise it will run before server can update number of NAF Avatars in world
+        setTimeout(function() {
+            // Only update UI if not first person on server
+            if (CIRCLES.getNAFAvatarElements().length == 1) {
+                console.log('isHost set to true');  //Debug statement
+                CONTEXT_AF.el.setAttribute('isHost', 'true');
+            } else {
+                console.log('isHost set to false');  //Debug statement
+                CONTEXT_AF.el.setAttribute('isHost', 'false');
+            }
+        }, 2000);
+
+        // TO DO: Replace the button with a check for three players. When there are three players, start game.
+        // this check should be in the game-manager component's tick() function
+
+        //set button to spawn new artifact on press
+        let testButtonEl = document.querySelector('#test_button');     //get button element
+        testButtonEl.addEventListener('click', function() {            //add event listener for on click
+            setupArtifacts();
+        });
+
         // Network Stuff
 
         // Initial setup

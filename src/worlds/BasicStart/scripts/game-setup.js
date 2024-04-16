@@ -14,8 +14,7 @@ function setupGame(){
     setTimeout(function() {
         // Only update UI if not first person on server
         if (CIRCLES.getNAFAvatarElements() > 1) {
-            // TO DO: refigure spawnArtifactUI function from spawn-artifacts.js to select cloned networked object artifacts
-            spawnArtifactUI();
+            
         }
     }, 2000);
 
