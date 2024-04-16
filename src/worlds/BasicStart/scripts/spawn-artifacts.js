@@ -27,9 +27,6 @@ artifactList['Clock'] = {
     model_path: '/worlds/BasicStart/assets/models/artifacts/Clock.glb',
     name: 'AUTOMOTIVE CLOCK',
     description: 'A BRASS OBJECT WITH A GLASS FACE. USED AS A AUTOMOTIVE PART',
-    number: '716'
-
-
 };
 artifactList['DiskDrive'] = {
     artifact_id: 'DiskDrive',
@@ -41,7 +38,6 @@ artifactList['DiskDrive'] = {
     model_path: '/worlds/BasicStart/assets/models/artifacts/DiskDrive.glb',
     name: 'CONTROLLER, DISK DRIVE',
     description: 'THE CONTROL UNIT FOR THE DISK DRIVES USED AS AUXILIARY STORAGE DEVICES FOR LARGE QUANTITY AND/OR LONG TERM STORAGE',
-    number: '734'
 };
 artifactList['Fridge'] = {
     artifact_id: 'Fridge',
@@ -53,7 +49,6 @@ artifactList['Fridge'] = {
     model_path: '/worlds/BasicStart/assets/models/artifacts/Fridge.glb',
     name: 'ELECTRIC REFRIGERATOR',
     description: 'THE MANUFACTUER OF THE REFRIGERATORS DESIGNED THE PRODUCT TO MEET TECHNOLOGICAL, BUT ALSO FASHION REQUIREMENTS OF A MODERN HOUSEWIFE.',
-    number: '715'
 };
 artifactList['OpticalLens'] = {
     artifact_id: 'OpticalLens',
@@ -65,7 +60,6 @@ artifactList['OpticalLens'] = {
     model_path: '/worlds/BasicStart/assets/models/artifacts/OpticalLens.glb',
     name: 'FLAT, OPTICAL',
     description: 'USED IN PAIRS IN CONJUNCTION WITH A MONOCHROMATIC LIGHT SOURCE TO TEST THE FLATNESS OF A THIRD SURFACE',
-    number: '351'
 };
 artifactList['Radio'] = {
     artifact_id: 'Radio',
@@ -77,7 +71,6 @@ artifactList['Radio'] = {
     model_path: '/worlds/BasicStart/assets/models/artifacts/Radio.glb',
     name: 'RECEIVER, RADIO',
     description: 'TO RECEIVE, DEMODULATE & AMPLIFY AM AND SHORT WAVE (2 BANDS) STANDARD BROADCAST SIGNALS',
-    number: '845'
 };
 artifactList['Syringe'] = {
     artifact_id: 'Syringe',
@@ -89,7 +82,83 @@ artifactList['Syringe'] = {
     model_path: '/worlds/BasicStart/assets/models/artifacts/Syringe.glb',
     name: 'SYRINGE, IRRIGATION',
     description: 'USED TO FLUSH EAR CANAL WITH WARM OIL & SALINE SOLUTION TO ORDER REMOVE WAX AND OTHER DEBRIS.',
-    number: '251'
+};
+artifactList['Camera'] = {
+    artifact_id: 'Camera',
+    year: '1955–1957',
+    country: 'GERMANY', 
+    manufacturer: 'WITT, WILHELM ILOCA WERK CO.',
+    model_id: '#ID_Camera_Model',
+    image_id: '#ID_Camera_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/Camera.glb',
+    name: 'CAMERA',
+    description: 'TO RECORD STILL IMAGES. MODEL NAME "REALIST 45" ENGRAVED, SCRIPT, BLACK, ON LENS BOARD AND TOP OF CAMERA.',
+};
+artifactList['Joystick'] = {
+    artifact_id: 'Joystick',
+    year: '1989',
+    country: 'UNITED STATES OF AMERICA', 
+    manufacturer: 'KRAFT SYSTEMS INC',
+    model_id: '#ID_Joystick_Model',
+    image_id: '#ID_Joystick_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/Joystick.glb',
+    name: 'JOYSTICK',
+    description: 'TO RECORD STILL IMAGES. MODEL NAME "REALIST 45" ENGRAVED, SCRIPT, BLACK, ON LENS BOARD AND TOP OF CAMERA.',
+};
+artifactList['Poster'] = {
+    artifact_id: 'Poster',
+    year: '1939-1945',
+    country: 'ENGLAND', 
+    manufacturer: 'UNKNOWN',
+    model_id: '#ID_Poster_Model',
+    image_id: '#ID_Poster_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/Poster.glb',
+    name: 'POSTER',
+    description: 'DISTRIBUTED BY GOVERNMENT THROUGH EMBASSIES TO BOOST MORALE & SUPPORT FOR AIR WAR OVER EUROPE.',
+};
+artifactList['Television'] = {
+    artifact_id: 'Television',
+    year: '1956',
+    country: 'CANADA', 
+    manufacturer: 'MEASUREMENT ENGINEERING LTD.',
+    model_id: '#ID_Television_Model',
+    image_id: '#ID_Television_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/Television.glb',
+    name: 'RECEIVER, TELEVISION',
+    description: 'DISTRIBUTED BY GOVERNMENT THROUGH EMBASSIES TO BOOST MORALE & SUPPORT FOR AIR WAR OVER EUROPE.',
+};
+artifactList['Toaster'] = {
+    artifact_id: 'Toaster',
+    year: '1964',
+    country: 'UNITED STATES OF AMERICA', 
+    manufacturer: 'SUNBEAM CORP. (CANADA) LTD.',
+    model_id: '#ID_Toaster_Model',
+    image_id: '#ID_Toaster_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/Toaster.glb',
+    name: 'TOASTER',
+    description: 'USED TO RE-HEAT COOKED FOOD, ESPECIALLY BAKED GOODS SUCH AS BREADS, WAFFLES, ETC. THAT CAN BE SLICED, BY APPLING RADIANT HEAT AT CLOSE RANGE.',
+};
+artifactList['WashingMachine'] = {
+    artifact_id: 'WashingMachine',
+    year: '1954',
+    country: 'CANADA', 
+    manufacturer: 'GENERAL ELECTRIC',
+    model_id: '#ID_WashingMachine_Model',
+    image_id: '#ID_WashingMachine_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/WashingMachine.glb',
+    name: 'WASHER & SPIN DRYER',
+    description: 'WHITE ENAMELED METAL. CHROME PLATED LINE IN FRONT & AROUND CONTROL TOP. EMBOSSED LINES ON COPPER COLORED METAL CONTROL TOP. TRANSPARENT PLASTIC WITH MIDDLE COPPER.',
+};
+artifactList['Wheel'] = {
+    artifact_id: 'Wheel',
+    year: '1947',
+    country: 'SCOTLAND', 
+    manufacturer: 'MACTAGGART, SCOTT & CO. LTD.',
+    model_id: '#ID_Wheel_Model',
+    image_id: '#ID_Wheel_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/Wheel.glb',
+    name: ' STEERING WHEEL, SHIP',
+    description: 'FROM THE HISTORIC SHIP "THE CABOT STRAIGHT". WOOD & METAL VARNISHED',
 };
 
 //change some a-scene properties
