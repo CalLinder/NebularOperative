@@ -157,8 +157,19 @@ artifactList['Wheel'] = {
     model_id: '#ID_Wheel_Model',
     image_id: '#ID_Wheel_IMG',
     model_path: '/worlds/BasicStart/assets/models/artifacts/Wheel.glb',
-    name: ' STEERING WHEEL, SHIP',
+    name: 'STEERING WHEEL, SHIP',
     description: 'FROM THE HISTORIC SHIP "THE CABOT STRAIGHT". WOOD & METAL VARNISHED',
+};
+artifactList['FlightSimulator'] = {
+    artifact_id: 'FlightSimulator',
+    year: '1940',
+    country: 'CANADA', 
+    manufacturer: 'LINK MFG. CO. LTD.',
+    model_id: '#ID_FlightSimulator_Model',
+    image_id: '#ID_FlightSimulator_IMG',
+    model_path: '/worlds/BasicStart/assets/models/artifacts/FlightSimulator.glb',
+    name: 'TRAINER-SIMULATOR, FLIGHT',
+    description: 'USED IN THE AVIATION INDUSTRY, THE LINK TRAINER FLIGHT SIMULATOR IS MADE OUT OF 9 TOTAL PARTS',
 };
 
 //change some a-scene properties
