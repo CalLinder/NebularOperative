@@ -73,6 +73,7 @@
       <a-asset-item id="ID_Wrong_Item_SFX" src="/worlds/BasicStart/assets/audio/SFX/Wrong_Item.wav" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="ID_Correct_Item_SFX" src="/worlds/BasicStart/assets/audio/SFX/Correct_Item.wav" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="ID_System_Beep_SFX" src="/worlds/BasicStart/assets/audio/SFX/System_Beep.wav" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_Intro_Narration_SFX" src="/worlds/BasicStart/assets/audio/SFX/Intro_Narration.wav" response-type="arraybuffer"></a-asset-item>
 
       <!-- Images (.jpg) -->
       <img id="ID_Clock_IMG" src="/worlds/BasicStart/assets/images/IMG_AutomotiveClock.png" crossorigin="anonymous"></a-asset-item>
@@ -102,6 +103,7 @@
     <a-entity id="pickupSFXPlayer" circles-sound="type:basic-nondiegetic; src:#ID_Item_Pickup_SFX; autoplay:false; loop:false; volume:0.2;"></a-entity>
     <a-entity id="dropSFXPlayer" circles-sound="type:basic-nondiegetic; src:#ID_Item_Dropped_SFX; autoplay:false; loop:false; volume:0.2;"></a-entity>
     <a-entity id="heldSFXPlayer" circles-sound="type:basic-nondiegetic; src:#ID_Item_Held_SFX; autoplay:false; loop:true; volume:0.19;"></a-entity>
+    <a-entity id="introSFXPlayer" circles-sound="type:basic-nondiegetic; src:#ID_Intro_Narration_SFX; autoplay:false; loop:false; volume:0.19;"></a-entity>
 
     <!-- Manager Components -->
     <a-entity item-pickup-drop-manager></a-entity>
@@ -141,37 +143,6 @@
       circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -1 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -6"
     ></a-entity>
 
-    <!-- Item Spawners -->
-    <!-- <a-box
-      id="ID_Artifact_Spawner_1"
-      position="-9 1 -2"
-      rotation="0 0 0"
-      height="0.25"
-      width="0.25"
-      depth="0.25"
-      color="tomato"
-    ></a-box>
-    
-    <a-box
-      id="ID_Artifact_Spawner_2"
-      position="-9 1 -4"
-      rotation="0 0 0"
-      height="0.25"
-      width="0.25"
-      depth="0.25"
-      color="tomato"
-    ></a-box>
-    
-    <a-box
-      id="ID_Artifact_Spawner_3"
-      position="-9 1 -6"
-      rotation="0 0 0"
-      height="0.25"
-      width="0.25"
-      depth="0.25"
-      color="tomato"
-    ></a-box> -->
-
     <!-- Item Checker -->
     <a-entity
       id="ID_Artifact_Checker_1"
@@ -204,14 +175,6 @@
       color="green"
       item-checker
     ></a-box> -->
-
-    <!-- TEST OBJECTS - DELETE WHEN DONE TESTING -->
-    <!-- BUTTON FOR SPAWNING ARTIFACT -->
-    <a-entity
-      id="test_button"
-      circles-button
-      position="-9 0 -1"
-    ></a-entity>
 
     <!-- Environment (.glb) & Navmesh Entities -->
     <a-entity

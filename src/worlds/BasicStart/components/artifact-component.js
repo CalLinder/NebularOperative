@@ -108,13 +108,38 @@ AFRAME.registerComponent('artifact-component', {
             
             //===text===
             let guiTex_header = document.createElement('a-entity');
+
             //TO DO: ADD ROLE ASSIGNMENT HERE: (IF ROLE == X ROLE, THEN FILL DATA IN AS APPROPRIATE - STATIC VALUES USED TEMPORARILY)
-            guiTex_header.setAttribute("text", "value:COUNTRY OF ORIGIN; color:rgb(0, 251, 255); font:"+ font +"; width:0.3; anchor:center; align:center; baseline:top; wrapCount:20;");
+            let role = document.querySelector('#ID_Game_Manager').getAttribute('playerRole');
+            switch(role) {
+                case Role_Year:
+                    guiTex_header.setAttribute("text", "value:YEAR OF ORIGIN; color:rgb(0, 251, 255); font:"+ font +"; width:0.3; anchor:center; align:center; baseline:top; wrapCount:20;");
+                    break;
+                case Role_Country:
+                    guiTex_header.setAttribute("text", "value:COUNTRY OF ORIGIN; color:rgb(0, 251, 255); font:"+ font +"; width:0.3; anchor:center; align:center; baseline:top; wrapCount:20;");
+                    break;
+                case Role_Manufacturer:
+                    guiTex_header.setAttribute("text", "value:MANUFACTURER; color:rgb(0, 251, 255); font:"+ font +"; width:0.3; anchor:center; align:center; baseline:top; wrapCount:20;");
+                    break;
+            }
+            
             guiTex_header.setAttribute("position", "0 0.13 0.01");
 
             //TO DO: ADD ROLE ASSIGNMENT HERE: (IF ROLE == X ROLE, THEN FILL DATA I AS APPROPRIATE - ITEM COUNTRY USED)
             let guiTex_main = document.createElement('a-entity');
-            guiTex_main.setAttribute("text", "value:" + item.country + "; color:white; font:"+ font +"; width:0.65; anchor:center; align:center; baseline:top; wrapCount:25;");
+            
+            switch(role) {
+                case Role_Year:
+                    guiTex_main.setAttribute("text", "value:" + item.year + "; color:white; font:"+ font +"; width:0.65; anchor:center; align:center; baseline:top; wrapCount:25;");
+                    break;
+                case Role_Country:
+                    guiTex_main.setAttribute("text", "value:" + item.country + "; color:white; font:"+ font +"; width:0.65; anchor:center; align:center; baseline:top; wrapCount:25;");
+                    break;
+                case Role_Manufacturer:
+                    guiTex_main.setAttribute("text", "value:" + item.manufacturer + "; color:white; font:"+ font +"; width:0.65; anchor:center; align:center; baseline:top; wrapCount:25;");
+                    break;
+            }
+            
             guiTex_main.setAttribute("position", "0 0.085 0.01");
 
             //append text
@@ -287,12 +312,33 @@ function createNonHostUI() {
             //===text===
             let guiTex_header = document.createElement('a-entity');
             //TO DO: ADD ROLE ASSIGNMENT HERE: (IF ROLE == X ROLE, THEN FILL DATA IN AS APPROPRIATE - STATIC VALUES USED TEMPORARILY)
-            guiTex_header.setAttribute("text", "value:COUNTRY OF ORIGIN; color:rgb(0, 251, 255); font:"+ font +"; width:0.3; anchor:center; align:center; baseline:top; wrapCount:20;");
+            let role = document.querySelector('#ID_Game_Manager').getAttribute('playerRole');
+            switch(role) {
+                case Role_Year:
+                    guiTex_header.setAttribute("text", "value:YEAR OF ORIGIN; color:rgb(0, 251, 255); font:"+ font +"; width:0.3; anchor:center; align:center; baseline:top; wrapCount:20;");
+                    break;
+                case Role_Country:
+                    guiTex_header.setAttribute("text", "value:COUNTRY OF ORIGIN; color:rgb(0, 251, 255); font:"+ font +"; width:0.3; anchor:center; align:center; baseline:top; wrapCount:20;");
+                    break;
+                case Role_Manufacturer:
+                    guiTex_header.setAttribute("text", "value:MANUFACTURER; color:rgb(0, 251, 255); font:"+ font +"; width:0.3; anchor:center; align:center; baseline:top; wrapCount:20;");
+                    break;
+            }
             guiTex_header.setAttribute("position", "0 0.13 0.01");
     
             //TO DO: ADD ROLE ASSIGNMENT HERE: (IF ROLE == X ROLE, THEN FILL DATA I AS APPROPRIATE - ITEM COUNTRY USED)
             let guiTex_main = document.createElement('a-entity');
-            guiTex_main.setAttribute("text", "value:" + item.country + "; color:white; font:"+ font +"; width:0.65; anchor:center; align:center; baseline:top; wrapCount:25;");
+            switch(role) {
+                case Role_Year:
+                    guiTex_main.setAttribute("text", "value:" + item.year + "; color:white; font:"+ font +"; width:0.65; anchor:center; align:center; baseline:top; wrapCount:25;");
+                    break;
+                case Role_Country:
+                    guiTex_main.setAttribute("text", "value:" + item.country + "; color:white; font:"+ font +"; width:0.65; anchor:center; align:center; baseline:top; wrapCount:25;");
+                    break;
+                case Role_Manufacturer:
+                    guiTex_main.setAttribute("text", "value:" + item.manufacturer + "; color:white; font:"+ font +"; width:0.65; anchor:center; align:center; baseline:top; wrapCount:25;");
+                    break;
+            }
             guiTex_main.setAttribute("position", "0 0.085 0.01");
     
             //append text

@@ -55,7 +55,7 @@ schema: {
                         let vecSpawnToChecker = new THREE.Vector3().copy(CONTEXT_AF.el.object3D.position).sub(e.detail.item.parentNode.object3D.position);
 
                         //have the object be placed on the checker instead of its spawn point
-                        e.detail.item.setAttribute("position", + vecSpawnToChecker.x + " " + vecSpawnToChecker.y + " " + vecSpawnToChecker.z);
+                        e.detail.item.setAttribute("position", + vecSpawnToChecker.x + " " + vecSpawnToChecker.y + 1 + " " + vecSpawnToChecker.z);
                         e.detail.item.setAttribute("rotation", "0 90 0");
 
                         // If HOST player submits artifact
@@ -220,7 +220,7 @@ function submitNonHostArtifact(artifactID) {
     let vecSpawnToChecker = new THREE.Vector3().copy(artifactCheckerElement.object3D.position).sub(artifactElement.parentNode.object3D.position);
 
     //have the object be placed on the checker instead of its spawn point
-    artifactElement.setAttribute("position", + vecSpawnToChecker.x + " " + vecSpawnToChecker.y + " " + vecSpawnToChecker.z);
+    artifactElement.setAttribute("position", + vecSpawnToChecker.x + " " + vecSpawnToChecker.y + 1 + " " + vecSpawnToChecker.z);
     artifactElement.setAttribute("rotation", "0 90 0");
 
     //initiate checking sequence
