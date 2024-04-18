@@ -34,9 +34,6 @@
       <!-- Circles' built-in assets [REQUIRED] -->
       <circles-assets/>
 
-      <!-- Spawnpoint -->
-      <a-entity circles-checkpoint circles-spawnpoint position="-9 0 0"></a-entity>
-
       <!-- Environment (.glb) & Navmesh Models -->
       <a-asset-item id="ID_Environment_Model" src="/worlds/BasicStart/assets/models/Environment.glb" response-type="arraybuffer" timeout="10000"></a-asset-item>
       <a-asset-item id="ID_Navmesh_Model" src="/worlds/BasicStart/assets/models/Navmesh.glb" response-type="arraybuffer"></a-asset-item>
@@ -58,7 +55,9 @@
       <a-asset-item id="ID_Wheel_Model" src="/worlds/BasicStart/assets/models/artifacts/Wheel.glb" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="ID_FlightSimulator_Model" src="/worlds/BasicStart/assets/models/artifacts/FlightSimulator.glb" response-type="arraybuffer"></a-asset-item>
 
-
+      <!-- Teleport Pad Model -->
+      <a-asset-item id="ID_Teleport_Pad_Model" src="/worlds/BasicStart/assets/models/TeleportPadModel.glb" response-type="arraybuffer"></a-asset-item>
+      
       <!-- UI Models (.obj and .mtl) -->
       <a-asset-item id="ID_UI_Game_Info_Model" src="/worlds/BasicStart/assets/models/ui/backup/UI_GameInfo.glb" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="ID_UI_Object_Info_Model" src="/worlds/BasicStart/assets/models/ui/backup/UI_ObjectInfo.glb" response-type="arraybuffer"></a-asset-item>
@@ -74,6 +73,7 @@
       <a-asset-item id="ID_Correct_Item_SFX" src="/worlds/BasicStart/assets/audio/SFX/Correct_Item.wav" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="ID_System_Beep_SFX" src="/worlds/BasicStart/assets/audio/SFX/System_Beep.wav" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="ID_Intro_Narration_SFX" src="/worlds/BasicStart/assets/audio/SFX/Intro_Narration.wav" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="ID_Correct_Narration_SFX" src="/worlds/BasicStart/assets/audio/SFX/Correct_Narration.wav" response-type="arraybuffer"></a-asset-item>
 
       <!-- Images (.jpg) -->
       <img id="ID_Clock_IMG" src="/worlds/BasicStart/assets/images/IMG_AutomotiveClock.png" crossorigin="anonymous"></a-asset-item>
@@ -104,43 +104,213 @@
     <a-entity id="dropSFXPlayer" circles-sound="type:basic-nondiegetic; src:#ID_Item_Dropped_SFX; autoplay:false; loop:false; volume:0.2;"></a-entity>
     <a-entity id="heldSFXPlayer" circles-sound="type:basic-nondiegetic; src:#ID_Item_Held_SFX; autoplay:false; loop:true; volume:0.19;"></a-entity>
     <a-entity id="introSFXPlayer" circles-sound="type:basic-nondiegetic; src:#ID_Intro_Narration_SFX; autoplay:false; loop:false; volume:0.19;"></a-entity>
+    <a-entity id="outroSFXPlayer" circles-sound="type:basic-nondiegetic; src:#ID_Correct_Narration_SFX; autoplay:false; loop:false; volume:0.19;"></a-entity>
 
     <!-- Manager Components -->
     <a-entity item-pickup-drop-manager></a-entity>
     <a-entity game-manager id='ID_Game_Manager'></a-entity>
 
+    <!-- Spawnpoint -->
+    <a-entity circles-spawnpoint position="-13.5 0.1 3.4"></a-entity>
+    <a-entity circles-spawnpoint position="-17 0.1 6.4"></a-entity>
+    <a-entity circles-spawnpoint position="-19.5 0.1 3.4"></a-entity>
+
+    <!-- Checkpoints -->
+    <!-- left side -->
+    <a-entity circles-checkpoint position="-8.63 0.1 7" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-8.63 0.1 2.75" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-8.63 0.1 -3" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-8.63 0.1 -7" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-8.63 0.1 -12" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-8.63 0.1 -16" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    
+    <!-- left side aisles -->
+    <a-entity circles-checkpoint position="-2.5 0.1 4.3" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-1.5 0.1 -2" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-1.5 0.1 -6.5" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-1.5 0.1 -13" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-1.5 0.1 -16.7" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    
+    <!-- middle aisles -->
+    <a-entity circles-checkpoint position="-15 0.1 -16" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-15 0.1 -11.7" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-15 0.1 -7" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-15 0.1 -7" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-15 0.1 -2.75" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-15 0.1 1.45" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    
+    <!-- right side -->
+    <a-entity circles-checkpoint position="-21.63 0.1 7" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-21.63 0.1 2.75" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-21.63 0.1 -3" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-21.63 0.1 -7" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-21.63 0.1 -12" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-21.63 0.1 -16" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    
+    <!-- right side aisles -->
+    <a-entity circles-checkpoint position="-27 0.1 4.3" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-28 0.1 -2.1" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-28 0.1 -7.56" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-28 0.1 -13" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-28 0.1 -16.4" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    
+    <!-- item checker -->
+    <a-entity circles-checkpoint position="-13 0.1 5" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    <a-entity circles-checkpoint position="-16.2 0.1 7" useDefaultModel="false" gltf-model="#ID_Teleport_Pad_Model"></a-entity>
+    
     <!-- Artifact Entities -->
     <a-entity
       id="ID_Artifact_Entity_1"
-      position="-9 1 -2"
-      rotation="0 0 0"
+      position="-0.38 1 2.3"
+      rotation="0 180 0"
       scale="1 1 1"
       gltf-model=""
       artifact-component
       circles-pickup-networked
-      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -1 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -2"
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 180 0; dropPosition: -0.38 1 2.3"
     ></a-entity>
     
     <a-entity
       id="ID_Artifact_Entity_2"
-      position="-9 1 -4"
-      rotation="0 0 0"
+      position="1 1 -2"
+      rotation="0 180 0"
       scale="1 1 1"
       gltf-model=""
       artifact-component
       circles-pickup-networked
-      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -1 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -4"
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 180 0; dropPosition: 1 1 -2"
     ></a-entity>
     
     <a-entity
       id="ID_Artifact_Entity_3"
-      position="-9 1 -6"
+      position="1 1 -6.6"
+      rotation="0 180 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 180 0; dropPosition: 1 1 -6.6"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_4"
+      position="1 1 -13"
+      rotation="0 180 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 180 0; dropPosition: 1 1 -13"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_5"
+      position="1 1 -16"
+      rotation="0 180 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 180 0; dropPosition: 1 1 -16"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_6"
+      position="-30 1 2.75"
       rotation="0 0 0"
       scale="1 1 1"
       gltf-model=""
       artifact-component
       circles-pickup-networked
-      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -1 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -6"
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -30 1 2.75"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_7"
+      position="-31 1 -2"
+      rotation="0 0 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -31 1 -2"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_8"
+      position="-29.5 1 -7.5"
+      rotation="0 0 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -29.5 1 -7.5"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_9"
+      position="-31 1 -13"
+      rotation="0 0 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -31 1 -13"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_10"
+      position="-31 1 -16.5"
+      rotation="0 0 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -31 1 -16.5"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_11"
+      position="-18 1 -3"
+      rotation="0 0 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -18 1 -3"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_12"
+      position="-12 1 -7.2"
+      rotation="0 0 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -12 1 -7.2"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_13"
+      position="-18 1 -11.4"
+      rotation="0 0 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -18 1 -11.4"
+    ></a-entity>
+    
+    <a-entity
+      id="ID_Artifact_Entity_14"
+      position="-12 1 -16"
+      rotation="0 0 0"
+      scale="1 1 1"
+      gltf-model=""
+      artifact-component
+      circles-pickup-networked
+      circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 -0.4 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -12 1 -16"
     ></a-entity>
 
     <!-- Item Checker -->

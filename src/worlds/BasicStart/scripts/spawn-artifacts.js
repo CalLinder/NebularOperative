@@ -1,20 +1,22 @@
 'use strict'
 
 // Global Vars
-const numArtifacts = 3; // Ensure there are enough ID_Artifact_Entity_[insert number]'s in scene to match numArtifacts
+const numArtifacts = 8; // Ensure there are enough ID_Artifact_Entity_[insert number]'s in scene to match numArtifacts
+const numArtifactSpawners = 14; // This must equal the number of ID_Artifact_Entity_[insert number]'s in scene
 const font = "dejavu";
 //ui fade length (ms)
 const fade = 200;
 
-// Test Values | Goal is 'OpticalLens' and therefore it MUST spawn in the round
-const challengeYear = '1943';
-const challengeCountry = 'ENGLAND';
-const challengeManufacturer = 'NATIONAL PHYSICAL LABORATORIES';
+// Challenge Values | Default Goal is 'OpticalLens' 
+let challengeYear = '1943';
+let challengeCountry = 'ENGLAND';
+let challengeManufacturer = 'NATIONAL PHYSICAL LABORATORIES';
 // TO DO: Instead of challenge year, country, manufacturer, etc, it should be a range or clue (i.e., 1940-1950, continent, national manufacturer, etc)
 
 // Artifact Lists/Arrays/Objects
 const artifactList = {};    // This object will contain all artifact data (id, year, country, manufacturer, model ID)
 let artifactIDList = [];    // This array will contain a list of ID's for all artifacts that will be spawned into the scene
+let spawnerElList = [];     // This array will contain a list of elements for all spawners that have yet to be used to spawn an artifact
 
 // Add Artifact Data to artifactList Object Index
 artifactList['Clock'] = {
@@ -85,7 +87,7 @@ artifactList['Syringe'] = {
 };
 artifactList['Camera'] = {
     artifact_id: 'Camera',
-    year: '1955–1957',
+    year: '1955-1957',
     country: 'GERMANY', 
     manufacturer: 'WITT, WILHELM ILOCA WERK CO.',
     model_id: '#ID_Camera_Model',
@@ -192,16 +194,23 @@ artifactList['FlightSimulator'] = {
 function setupArtifacts() {
     console.log('setupArtifacts() running');    //Debug message
 
-    //determine challenge process should be here or even better it would be networked
+    //TO DO: determine challenge process should be here or even better it would be networked
     
     //change some a-scene properties
     let scene = document.querySelector('a-scene');
     scene.setAttribute("renderer","sortObjects:true; antialias:true; colormanagement:true; foveationLevel:3; highRefreshRate:true;physicallyCorrectLights:true;logarithmicDepthBuffer:false;precision:high;");
     
-    //set artifactIDList[0] to be the target artifact ID
-    artifactIDList.push(returnArtifactsByAll(challengeYear, challengeCountry, challengeManufacturer));
+    //set artifactIDList[0] to be a random target artifact ID
+    artifactIDList.push(returnRandomArtifactID());
 
-    //TO DO: fill remaining number of artifact slots with random, but similar, artifacts (i.e., same year, country, or manufacturer)
+    //set challenge goals to equal artifactIDList[0] year, country, and manufacturer
+    challengeYear = artifactList[artifactIDList[0]].year;
+    challengeCountry = artifactList[artifactIDList[0]].country;
+    challengeManufacturer = artifactList[artifactIDList[0]].manufacturer;
+    
+
+    //set artifactIDList[0] to be the target artifact ID
+    // artifactIDList.push(returnArtifactsByAll(challengeYear, challengeCountry, challengeManufacturer));
 
     //if there are still empty artifact slots, fill them with truely random artifacts
     if (artifactIDList.length < numArtifacts) { //artifactIDList.length should be min 1
@@ -227,13 +236,20 @@ function spawnArtifacts() {
     //   circles-pickup-object="pickupScale:1 1 1; pickupRotation:0 -190 0; pickupPosition:0 0 0; dropScale: 1 1 1; dropRotation: 0 0 0; dropPosition: -9 1 -2"
     // ></a-entity>
 
+    // Add all artifact spawners in scene to spawnerElList[]
+    for (let j = 1; j <= numArtifactSpawners; j++) {
+        spawnerElList.push(document.querySelector("#ID_Artifact_Entity_" + j))  // set spawnerElList to 
+    }
+
     // Loop through for each artifact that needs to be spawned
     for (let i = 1; i <= numArtifacts; i++) {
 
         let item = artifactList[artifactIDList[i-1]];
 
         // Select ID_Artifact_Entity_[i] a-entity element in scene
-        let artifactEl = document.querySelector("#ID_Artifact_Entity_" + i)
+        let randomSpawnerIndex = Math.floor(Math.random() * spawnerElList.length);      // get index of random spawner from spawnerElList
+        let artifactEl = spawnerElList[randomSpawnerIndex];                             // set artifactEl to equal element at random index of artifact spawner
+        spawnerElList.splice(randomSpawnerIndex, 1);                                    // remove that element spawner from the spawnerElList
             
         artifactEl.setAttribute('artifact_id', "ID_" + item.artifact_id);
         artifactEl.setAttribute('artifact_num', i);

@@ -200,8 +200,11 @@ function createNonHostUI() {
         for (let i = 0; i <= networkedEntities.length - 1; i++) {
             if (networkedEntities[i].classList.contains('interactive')) {
                 networkedEntities[i].flushToDOM();
-                artifactEntities.push(networkedEntities[i]);
-                networkedArtifactElementList.push(networkedEntities[i]);
+                if (networkedEntities[i].getAttribute('gltf-model') != '') {    // skip gltf models that are blank and therefore don't have an artifact assigned
+                    console.log('debug gltf-model: ' + networkedEntities[i].getAttribute('gltf-model'));
+                    artifactEntities.push(networkedEntities[i]);
+                    networkedArtifactElementList.push(networkedEntities[i]);
+                }
             }
         }
     
@@ -363,6 +366,6 @@ function createNonHostUI() {
             
         }
 
-    }, 3000);
+    }, 5000);
     
 }

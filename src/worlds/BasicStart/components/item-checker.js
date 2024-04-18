@@ -109,6 +109,10 @@ schema: {
                                         Global_Submitted_Artifact_Id = itemID;
                                         // dispatch custom event: CustomEvent_CorrectArtifact | event listener in game-manager.js
                                         document.querySelector('#ID_Game_Manager').dispatchEvent(CustomEvent_CorrectArtifact);
+                                        // dispatch custom event: CustomEvent_StartOutro | event listener in game-manager.js
+                                        document.querySelector('#ID_Game_Manager').dispatchEvent(CustomEvent_StartOutro);
+                                        //play startOutro() from game-manager.js
+                                        startOutro();
 
                                     }
                                     //if incorrect item
@@ -261,6 +265,10 @@ function submitNonHostArtifact(artifactID) {
                 Global_Submitted_Artifact_Id = itemID;
                 // dispatch custom event: CustomEvent_CorrectArtifact | event listener in game-manager.js
                 document.querySelector('#ID_Game_Manager').dispatchEvent(CustomEvent_CorrectArtifact);
+                // dispatch custom event: CustomEvent_StartOutro | event listener in game-manager.js
+                document.querySelector('#ID_Game_Manager').dispatchEvent(CustomEvent_StartOutro);
+                //play startOutro() from game-manager.js
+                startOutro();
 
             }
             //if incorrect item

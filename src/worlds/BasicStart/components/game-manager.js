@@ -1,7 +1,7 @@
 'use strict'
 
 // Global Vars
-const numPlayersToStart  = 2;
+const numPlayersToStart  = 3;
 let gameStarted = false;
 const Role_Year = 'Year Expert';
 const Role_Country = 'Country Expert';
@@ -16,6 +16,9 @@ const CustomEvent_CorrectArtifact = new CustomEvent('correct_artifact_event');
 const CustomEvent_IncorrectArtifact = new CustomEvent('incorrect_artifact_event');
 const CustomEvent_AssignRoles = new CustomEvent('assign_roles_event');
 const CustomEvent_StartIntro = new CustomEvent('start_intro_event');
+const CustomEvent_StartOutro = new CustomEvent('start_outro_event');
+const CustomEvent_SetChallenge = new CustomEvent('set_challenge_event');
+
 
 // NOTE: this array of networked artifact clone elements is required because for some unknown fucking reason, there are random periods of time where the element cannot be found in the document. I tried MANY different solutions... This is literally the only one that works without major reworks to how item-checking works.
 let networkedArtifactElementList = [];  // this array will contain all the elements for networked artifacts for the non-host players
@@ -32,7 +35,7 @@ AFRAME.registerComponent('game-manager', {
         // Game Setup Stuff
         console.log('setupGame() running');    //Debug message
 
-        // Delay by 2 seconds, otherwise it will run before server can update number of NAF Avatars in world
+        // Delay by 4 seconds, otherwise it will run before server can update number of NAF Avatars in world
         setTimeout(function() {
             // Only update UI if not first person on server
             if (CIRCLES.getNAFAvatarElements().length == 1) {
@@ -45,7 +48,7 @@ AFRAME.registerComponent('game-manager', {
                 CONTEXT_AF.el.setAttribute('playerNumber', CIRCLES.getNAFAvatarElements().length);
                 console.log('Your playerNumber is: ' + CIRCLES.getNAFAvatarElements().length);  //Debug statement
             }
-        }, 2000);
+        }, 4000);
 
         // Network Stuff
 
@@ -59,6 +62,8 @@ AFRAME.registerComponent('game-manager', {
         CONTEXT_AF.incorrectEventName = "incorrect_event";              //must be same name as in item-checker.js
         CONTEXT_AF.assignRolesName = "roles_event";                     //must be same name as in game-manager.js
         CONTEXT_AF.startIntroName = "intro_event";                      //must be same name as in game-manager.js
+        CONTEXT_AF.startOutroName = "outro_event";                      //must be same name as in game-manager.js
+        CONTEXT_AF.setChallengeName = "challenge_event";                //must be same name as in game-manager.js
 
         CONTEXT_AF.createNetworkingSystem = function () {
             CONTEXT_AF.socket = CIRCLES.getCirclesWebsocket();
@@ -109,6 +114,20 @@ AFRAME.registerComponent('game-manager', {
                 startIntro();    //function found in game-manager.js
             });
 
+            // Listen for start_outro_event from non-host players
+            CONTEXT_AF.socket.on(CONTEXT_AF.startOutroName, function(data) {
+                console.log('Received start_outro_event emit');
+                startOutro();    //function found in game-manager.js
+            });
+
+            // Listen for set_challenge_event from non-host players
+            CONTEXT_AF.socket.on(CONTEXT_AF.setChallengeName, function(data) {
+                console.log('Received set_challenge_event emit');
+                challengeYear = data.year;
+                challengeCountry = data.country;
+                challengeManufacturer = data.manufacturer;
+            });
+
 
 
             // Emit Statements ------------------------------------------
@@ -154,6 +173,18 @@ AFRAME.registerComponent('game-manager', {
                 CONTEXT_AF.socket.emit(CONTEXT_AF.startIntroName, {room: CIRCLES.getCirclesGroupName(), world: CIRCLES.getCirclesWorldName()});
             });
 
+            CONTEXT_AF.el.addEventListener('start_outro_event', (event) => {
+                console.log('Sending start_outro_event emit'); //debug statement
+                //start_outro_event is dispatched in game-manager.js
+                CONTEXT_AF.socket.emit(CONTEXT_AF.startOutroName, {room: CIRCLES.getCirclesGroupName(), world: CIRCLES.getCirclesWorldName()});
+            });
+
+            CONTEXT_AF.el.addEventListener('set_challenge_event', (event) => {
+                console.log('Sending set_challenge_event emit'); //debug statement
+                //set_challenge_event is dispatched in game-manager.js
+                CONTEXT_AF.socket.emit(CONTEXT_AF.setChallengeName, {room: CIRCLES.getCirclesGroupName(), world: CIRCLES.getCirclesWorldName(), year: challengeYear, country: challengeCountry, manufacturer: challengeManufacturer});
+            });
+
         };
   
         if (CIRCLES.isCirclesWebsocketReady()) {
@@ -187,9 +218,11 @@ AFRAME.registerComponent('game-manager', {
                         assignRole(playerRoles);
                         // spawn artifacts
                         setupArtifacts();
+                        // send artifact challenge targets to no hosts
+                        document.querySelector('#ID_Game_Manager').dispatchEvent(CustomEvent_SetChallenge);
                         // start timer
                         console.log('Game Started');   //debug statement
-                    }, 42000);
+                    }, 38000);
                 }, 3000); 
             }
             else {
@@ -279,5 +312,29 @@ function startIntro() {
         // update text on screens to match goals
         document.querySelector('#ID_Screen_1').setAttribute("setupRoundScreen", 'true');
         document.querySelector('#ID_Screen_2').setAttribute("setupRoundScreen", 'true');
-    }, 42000);
+    }, 43000);
+}
+
+function startOutro() {
+    // outro stuff here
+    console.log('Outro Started');   //debug statement
+    let audioSFXPlayer = document.querySelector('#outroSFXPlayer');
+    //timeout to ensure correct text is synched for UI
+    setTimeout(function() {
+        audioSFXPlayer.setAttribute("circles-sound", "state: play");
+        // update text on screens to match goals
+        document.querySelector('#ID_Screen_1').setAttribute("setupOutroScreen", 'true');
+        document.querySelector('#ID_Screen_2').setAttribute("setupOutroScreen", 'true');
+
+        setTimeout(function() {
+            // open portal to new world
+            let newWorld = document.createElement('a-entity');
+            newWorld.setAttribute('circles-portal', {title_text: 'Start a New Round'});
+            newWorld.setAttribute('position', '0.5 1 7.5');
+            newWorld.setAttribute('rotation', '0 -252 0');
+            console.log('Opening Portal To a New World!');
+            document.getElementsByTagName('a-scene')[0].appendChild(newWorld);
+        }, 10000);
+
+    }, 2000);
 }

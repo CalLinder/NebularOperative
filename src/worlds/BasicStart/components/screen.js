@@ -21,7 +21,7 @@ AFRAME.registerComponent('screen', {
 
         // create intro text here
         let textIntro = document.createElement('a-entity');
-        textIntro.setAttribute("text", "value:Welcome to Nebular Operative, where you, a robot from the technologically advanced planet of Ingenium, are on a quest to gain access to Earth. In this cooperative adventure, you'll team up with two fellow robots, each with a unique role: one knows the year of artifact creation, another the place of origin, and the third the manufacturer. Your objective? Pass the Nebular Exam by utilizing your combined knowledge to locate artifacts meeting specific criteria displayed on the screens. Through effective communication and teamwork, scavenge through the troves of historic artifacts and prove yourselves worthy of becoming certified Nebula Operatives. Good luck!; color:white; font:"+ font +"; width:2.8; anchor:left; baseline:top; wrapCount:60;"); //TO DO: CHANGE TEXT DEPENDING ON ROLES
+        textIntro.setAttribute("text", "value:Welcome to Nebular Operative, where you, a robot from the technologically advanced planet of Ingenium, are on a quest to gain access to Earth. In this cooperative adventure, you'll team up with two fellow robots, each with a unique role: one knows the year of artifact creation, another the place of origin, and the third the manufacturer. Your objective? Pass the Nebular Exam by utilizing your combined knowledge to locate artifacts meeting specific criteria displayed on the screens. Through effective communication and teamwork, scavenge through the troves of historic artifacts and prove yourselves worthy of becoming certified Nebula Operatives. Good luck!; color:white; font:"+ font +"; width:2.8; anchor:left; baseline:top; wrapCount:60;"); 
         textIntro.setAttribute("position", "0.45 0.35 -0.5");
         textIntro.setAttribute("rotation", "0 180 0");
         textIntro.setAttribute("scale", 1/scaleFactorX + " " + 1/scaleFactorY + " " + 1/scaleFactorZ);
@@ -121,6 +121,38 @@ AFRAME.registerComponent('screen', {
             }, 1200);
 
             CONTEXT_AF.el.setAttribute('setupRoundScreen', 'false');
+
+        }
+
+        if (CONTEXT_AF.el.getAttribute('setupOutroScreen') == 'true') {
+
+            //set up screen's audio player
+            let audioSFXPlayer = document.createElement('a-entity');        
+            audioSFXPlayer.setAttribute("circles-sound", {type: "basic-diegetic", src: "#ID_System_Beep_SFX", volume: "0.4", poolSize: "3"});        
+            audioSFXPlayer = CONTEXT_AF.el.appendChild(audioSFXPlayer);
+
+            let scaleFactorX = 3.02183;
+            let scaleFactorY = 1.75294;
+            let scaleFactorZ = 0.03;
+
+            //remove round text
+            CONTEXT_AF.el.querySelectorAll('.round_text')[0].setAttribute('visible', 'false');
+            CONTEXT_AF.el.querySelectorAll('.round_text')[1].setAttribute('visible', 'false');
+            CONTEXT_AF.el.querySelectorAll('.round_text')[2].setAttribute('visible', 'false');
+            CONTEXT_AF.el.querySelectorAll('.round_text')[3].setAttribute('visible', 'false');
+
+            // create outro text here
+            let textOutro = document.createElement('a-entity');
+            textOutro.setAttribute("text", "value:Congratulations, you have successfully located the correct artifact! You are now a fully certified Nebular Operative. If you would like to play again, please enter the portal which has now opened. Thank you for playing Nebular Operative!; color:white; font:"+ font +"; width:2.9; anchor:left; baseline:top; wrapCount:35;"); 
+            textOutro.setAttribute("position", "0.45 0.35 -0.5");
+            textOutro.setAttribute("rotation", "0 180 0");
+            textOutro.setAttribute("scale", 1/scaleFactorX + " " + 1/scaleFactorY + " " + 1/scaleFactorZ);
+            textOutro.setAttribute('class', 'intro_text');
+            textOutro.setAttribute("visible", "true");
+
+            CONTEXT_AF.el.appendChild(textOutro);
+
+            CONTEXT_AF.el.setAttribute('setupOutroScreen', 'false');
 
         }
     }
